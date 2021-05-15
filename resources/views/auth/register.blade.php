@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="page-header mt-5 text-center">
-            <h2>ユーザー登録</h2>
+            <h2>新規登録画面</h2>
     </div>
         
     <div class="row mt-5 mb-5">
