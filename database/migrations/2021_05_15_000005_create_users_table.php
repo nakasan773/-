@@ -19,11 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('email', 128)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 64);
-            $table->string('comment', 200);
+            $table->string('comment', 200)->nullable();
             $table->integer('age');//生年月日
-            $table->char('gender');//性別
+            $table->integer('user_sexes_id')->unsigned();//性別
+            $table->foreign('user_sexes_id')->references('id')->on('user_sexes')->onDelete('cascade');
             $table->char('residence');//居住地
-            
             $table->char('delete_flag', 1)->default(0); //デリートフラグ修正
         });
     }

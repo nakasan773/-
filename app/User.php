@@ -9,6 +9,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+    
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +18,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'user_name', 'email', 'password', 'user_sexes_id',
+        'comment', 'age', 'residence',
     ];
 
     /**
@@ -36,4 +39,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+        // Sexモデルを親に持つことを明記
+    public function sex()
+    {
+        return $this->belongsTo('App\Sex');
+    }
 }

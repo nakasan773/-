@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'password' => 'sample',
             'comment' => 'samplesamplesample',
             'age' => '24',
-            'gender' => '男',
+            'user_sexes_id' => 1,
             'residence' => '北海道',
         ]);
     }
