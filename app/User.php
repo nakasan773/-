@@ -42,6 +42,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+    //ページネーション
+    public function getAllUsers(Int $user_id)
+    {
+        return $this->Where('id', '<>', $user_id)->paginate(5);
+    }
+    
     // Sexモデルを親に持つことを明記
     public function sex()
     {
@@ -58,5 +64,29 @@ class User extends Authenticatable
     public function follows()
     {
         return $this->belongsToMany(self::class, 'followers', 'following_id', 'followed_id');
+    }
+    
+    // フォローする
+    public function follow(Int $user_id) 
+    {
+        return $this->follows()->attach($user_id);
+    }
+
+    // フォロー解除する
+    public function unfollow(Int $user_id)
+    {
+        return $this->follows()->detach($user_id);
+    }
+
+    // フォローしているか
+    public function isFollowing(Int $user_id) 
+    {
+        return (boolean) $this->follows()->where('followed_id', $user_id)->first(['id']);
+    }
+
+    // フォローされているか
+    public function isFollowed(Int $user_id) 
+    {
+        return (boolean) $this->followers()->where('following_id', $user_id)->first(['id']);
     }
 }
