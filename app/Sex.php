@@ -16,6 +16,6 @@ class Sex extends Model
     // Userモデルを子に持つことを記述
     public function users()
     {
-        return $this->hasMany('App\User');
+        return $this->hasMany('App\Models\User');
     }
 }

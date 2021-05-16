@@ -16,7 +16,19 @@ class Tweet extends Model
      */
     protected $fillable = [
         'text'
-    ];    
+    ];
+    
+    //ページネーション（カウント）ユーザー数
+    public function getUserTimeLine(Int $user_id)
+    {
+        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(50);
+    }
+
+    //ページネーション（カウント）ツイート
+    public function getTweetCount(Int $user_id)
+    {
+        return $this->where('user_id', $user_id)->count();
+    }
     
     //Userモデルを親に持つことを明記
     public function user()

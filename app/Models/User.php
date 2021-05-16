@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -9,7 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    
     /**
      * The attributes that are mass assignable.
      *
@@ -22,6 +21,7 @@ class User extends Authenticatable
         'user_sexes_id',
         'age',
         'residence',
+        'profile_image'
     ];
 
     /**
