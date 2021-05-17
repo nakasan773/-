@@ -14,12 +14,26 @@
                 <br>
                 
                 <div class="mt-1 clearfix">
-                    <p class="d-inline ml-2">ユーザー名</a>
-                    <input type="text" name="user_name" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
-                    @if ($errors->has('user_name'))
+                    <p class="d-inline ml-2">アカウントID</a>
+                    <input type="text" name="screen_name" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
+                    @if ($errors->has('screen_name'))
                         <div class="row justify-content-center">
                             <div class="cal-xs-4">
-                                <span style="color:red">{{ $errors->first('user_name') }}</span>
+                                <span style="color:red">{{ $errors->first('screen_name') }}</span>
+                            </div>
+                        </div>
+                    @endif
+                </div>
+                
+                <br>
+                
+                <div class="mt-1 clearfix">
+                    <p class="d-inline ml-2">ユーザー名</a>
+                    <input type="text" name="name" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
+                    @if ($errors->has('name'))
+                        <div class="row justify-content-center">
+                            <div class="cal-xs-4">
+                                <span style="color:red">{{ $errors->first('name') }}</span>
                             </div>
                         </div>
                     @endif

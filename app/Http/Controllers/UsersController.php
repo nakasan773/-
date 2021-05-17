@@ -21,7 +21,7 @@ class UsersController extends Controller
     {
         $all_users = $user->getAllUsers(auth()->user()->id);
 
-        return view('users.index', [
+        return view('welcome', [
             'all_users'  => $all_users
         ]);
     }
@@ -82,7 +82,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -94,7 +94,17 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'screen_name'   => ['required', 'string', 'max:50', Rule::unique('users')->ignore($user->id)],
+            'name'          => ['required', 'string', 'min:6', 'max:15'],
+            'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)]
+        ]);
+        $validator->validate();
+        $user->updateProfile($data);
+
+        return redirect('users/'.$user->id);
     }
 
     /**

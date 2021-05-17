@@ -2,86 +2,60 @@
 
 @section('content')
 
-@if (Auth::check())
-    <h1>ようこそ！！{{ Auth::user()->user_name }}さん</h1>
+    @if (Auth::check())
     
-    <div id="app">
-            <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-                <div class="container">
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="navbar-nav mr-auto">
-
-                        </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="navbar-nav ml-auto align-items-center">
-                            <!-- Authentication Links -->
-                            @guest
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                                @if (Route::has('register'))
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                    </li>
-                                @endif
-                            @else
-                                <li class="nav-item">
-                                    <img src="{{ auth()->user()->profile_image }}" class="rounded-circle" width="50" height="50">
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        {{ auth()->user()->user_name }} <span class="caret"></span>
-                                    </a>
-
-                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a href="{{ url('users/' .auth()->user()->id) }}" class="dropdown-item">プロフィール</a>
-                                        <a href="{{ route('logout') }}" class="dropdown-item"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                            {{ __('Logout') }}
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            @csrf
-                                        </form>
-                                    </div>
-                                </li>
-                            @endguest
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-
-            <main class="py-4">
-                @yield('content')
-            </main>
-        </div>
-    
-@else
-    <div class="container mt-5 pt-5 text-center">
-        <span class="display-4 font-weight-bold">人から人へつながる旅</span>
-    </div>
-    
-    <div class="row justify-content-center mt-5">
-        <div class="col-4 text-center">
-            <h3>まだアカウントを<br>お持ちでない方はこちら</h3>
-            <button type="button" class="btn btn-primary mt-5" onclick=location.href='signup' style="width:120px;height:50px">新規登録</button>
-        </div>
+        <br>
         
-        <div class="col-4 text-center">
-            <h3>すでにアカウントを<br>お持ちの方はこちら</h3>
-            <button type="button" class="btn btn-primary mt-5" onclick=location.href='login' style="width:120px;height:50px">ログイン</button>
+        <br>
+    
+        <h1>ようこそ！！{{ Auth::user()->name }}さん</h1>
+        
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    @foreach ($all_users as $user)
+                        <div class="card">
+                            <div class="card-haeder p-3 w-100 d-flex">
+                                <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
+                                <div class="ml-2 d-flex flex-column">
+                                    <p class="mb-0">{{ $user->name }}</p>
+                                    <a href="{{ url('users/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>
+                                </div>
+                                @if (auth()->user()->isFollowed($user->id))
+                                    <div class="px-2">
+                                        <span class="px-1 bg-secondary text-light">フォローされています</span>
+                                    </div>
+                                @endif
+                                <div class="d-flex justify-content-end flex-grow-1">
+                                    @if (auth()->user()->isFollowing($user->id))
+                                        <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
+                                            {{ csrf_field() }}
+                                            {{ method_field('DELETE') }}
+        
+                                            <button type="submit" class="btn btn-danger">フォロー解除</button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
+                                            {{ csrf_field() }}
+        
+                                            <button type="submit" class="btn btn-primary">フォローする</button>
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+            <div class="my-4 d-flex justify-content-center">
+                {{ $all_users->links() }}
+            </div>
         </div>
-    </div>
-@endif
+    
+    @else
+    
+        @include('users.guest')
+    
+    @endif
 
 @endsection

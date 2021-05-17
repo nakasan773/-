@@ -2,6 +2,10 @@
 
 @section('content')
 
+    <br>
+    
+    <br>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mb-3">
@@ -10,7 +14,7 @@
                         <div class="p-3 d-flex flex-column">
                             <img src="{{ $user->profile_image }}" class="rounded-circle" width="100" height="100">
                             <div class="mt-3 d-flex flex-column">
-                                <h4 class="mb-0 font-weight-bold">{{ $user->user_name }}</h4>
+                                <h4 class="mb-0 font-weight-bold">{{ $user->name }}</h4>
                                 <span class="text-secondary">{{ $user->screen_name }}</span>
                             </div>
                         </div>

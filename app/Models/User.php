@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -15,7 +16,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'user_name',
+        'screen_name',
+        'name',
         'email',
         'password',
         'user_sexes_id',
@@ -57,13 +59,25 @@ class User extends Authenticatable
     // リレーション
     public function followers()
     {
-        return $this->belongsToMany(self::class, 'followers', 'followed_id', 'following_id');
+        return $this->belongsToMany(User::class, 'followers', 'followed_id', 'following_id');
     }
     
     // リレーション
     public function follows()
     {
-        return $this->belongsToMany(self::class, 'followers', 'following_id', 'followed_id');
+        return $this->belongsToMany(User::class, 'followers', 'following_id', 'followed_id');
+    }
+    
+    // フォローしているか
+    public function isFollowing(Int $user_id) 
+    {
+        return $this->follows()->where('followed_id', $user_id)->exists();
+    }
+
+    // フォローされているか
+    public function isFollowed(Int $user_id) 
+    {
+        return (boolean) $this->followers()->where('following_id', $user_id)->first(['id']);
     }
     
     // フォローする
@@ -76,17 +90,5 @@ class User extends Authenticatable
     public function unfollow(Int $user_id)
     {
         return $this->follows()->detach($user_id);
-    }
-
-    // フォローしているか
-    public function isFollowing(Int $user_id) 
-    {
-        return (boolean) $this->follows()->where('followed_id', $user_id)->first(['id']);
-    }
-
-    // フォローされているか
-    public function isFollowed(Int $user_id) 
-    {
-        return (boolean) $this->followers()->where('following_id', $user_id)->first(['id']);
     }
 }

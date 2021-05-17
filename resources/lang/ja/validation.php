@@ -146,7 +146,8 @@ return [
     */
 
     'attributes' => [
-        'user_name'=>'ユーザー名',
+        'screen_name' => 'アカウントID',
+        'name'=>'ユーザー名',
         'comment'=>'コメント',
         'age'=>'年齢',
         'user_sexes_id'=>'性別',

@@ -13,32 +13,33 @@
                 <div class="row justify-content-center">
                     <div class="cal-xs-4">
                         <label for="email" class="mt-3">メールアドレス</label>
+                        @if ($errors->has('email'))
+                            <div class="row justify-content-center">
+                                <div class="cal-xs-4">
+                                    <span style="color:red">{{ $errors->first('email') }}</span>
+                                </div>
+                            </div>
+                        @endif
                         <input type="text" name="email" class="form-control">
                     </div>
                 </div>
-                @if ($errors->has('email'))
-                    <div class="row justify-content-center">
-                        <div class="cal-xs-4">
-                            <span style="color:red">{{ $errors->first('email') }}</span>
-                        </div>
-                    </div>
-                @endif
             </div>
 
             <div class="form-group">
                 <div class="row justify-content-center">
                     <div class="cal-xs-4">
                         <label>パスワード</label>
+                        @if ($errors->has('password'))
+                            <div class="row justify-content-center">
+                                <div class="cal-xs-4">
+                                    <span style="color:red">{{ $errors->first('password') }}</span>
+                                </div>
+                            </div>
+                        @endif
                         <input type="text" name="password" class="form-control">
                     </div>
                 </div>
-                @if ($errors->has('password'))
-                    <div class="row justify-content-center">
-                        <div class="cal-xs-4">
-                            <span style="color:red">{{ $errors->first('password') }}</span>
-                        </div>
-                    </div>
-                @endif
+
             </div>
 
             <div class="text-center">
