@@ -149,7 +149,7 @@ return [
         'screen_name' => 'アカウントID',
         'name'=>'ユーザー名',
         'comment'=>'コメント',
-        'age'=>'年齢',
+        'birthday'=>'生年月日',
         'user_sexes_id'=>'性別',
         'residence'=>'居住地',
         'email'=>'メールアドレス',

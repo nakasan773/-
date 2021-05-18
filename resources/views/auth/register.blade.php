@@ -5,17 +5,20 @@
     <div class="page-header mt-5 text-center">
             <h2>新規登録画面</h2>
     </div>
+    
+    <br>
         
     <div class="row mt-5 mb-5">
-        <div class="col-sm-5 mx-auto">
+        <div class="form-control-sm col-sm-5 mx-auto float-right">
             <form method="POST" action="{{ route('signup.post') }}">
             @csrf
                 
                 <br>
                 
+                <br>
+                
                 <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">アカウントID</a>
-                    <input type="text" name="screen_name" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                     @if ($errors->has('screen_name'))
                         <div class="row justify-content-center">
                             <div class="cal-xs-4">
@@ -23,46 +26,51 @@
                             </div>
                         </div>
                     @endif
+                    <input type="text" name="screen_name" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                 </div>
+                
+                <br>
                 
                 <br>
                 
                 <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">ユーザー名</a>
-                    <input type="text" name="name" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                     @if ($errors->has('name'))
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center ml-5">
                             <div class="cal-xs-4">
                                 <span style="color:red">{{ $errors->first('name') }}</span>
                             </div>
                         </div>
                     @endif
+                    <input type="text" name="name" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                 </div>
                 
                 <br>
                 
+                <br>
+                
                 <div class="mt-1 clearfix">
-                    <p class="d-inline ml-2">年齢</p>
-                    <input type="text" name="age" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
-                    @if ($errors->has('age'))
+                    <div class="form-control-sm d-inline float-left">
+                        <h6>年齢</h6>
+                    </div>
+                    @if ($errors->has('birthday'))
                         <div class="row justify-content-center">
                             <div class="cal-xs-4">
-                                <span style="color:red">{{ $errors->first('age') }}</span>
+                                <span style="color:red">{{ $errors->first('birthday') }}</span>
                             </div>
                         </div>
                     @endif
+                    @livewire('birthday')
+                    
                 </div>
+                
+                <br>
                 
                 <br>
                 
                 <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">性別</p>
-                    <select class="form-control-sm col-sm-8 ml-5 d-inline float-right" id="changeSelect" name="user_sexes_id" onchange="entryChange2();">
-                        <option value="">未選択</option>
-                        @foreach ($sexes as $sex)
-                            <option value="{{ $sex->id }}">{{ $sex->sex }}</option>
-                        @endforeach
-                    </select>
+                    
                     @if ($errors->has('user_sexes_id'))
                         <div class="row justify-content-center">
                             <div class="cal-xs-4">
@@ -70,13 +78,21 @@
                             </div>
                         </div>
                     @endif
+                    <select class="form-control-sm col-sm-8 ml-5 d-inline float-right" id="changeSelect" name="user_sexes_id" onchange="entryChange2();">
+                        <option value="">未選択</option>
+                        @foreach ($sexes as $sex)
+                            <option value="{{ $sex->id }}">{{ $sex->sex }}</option>
+                        @endforeach
+                    </select>
+                    
                 </div>
+                
+                <br>
                 
                 <br>
                 
                 <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">居住地</p>
-                    <input type="text" name="residence" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                     @if ($errors->has('residence'))
                         <div class="row justify-content-center">
                             <div class="cal-xs-4">
@@ -84,41 +100,47 @@
                             </div>
                         </div>
                     @endif
+                    <input type="text" name="residence" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                 </div>
+                
+                <br>
                 
                 <br>
                 
                 <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">メースアドレス</p>
-                    <input type="text" name="email" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                     @if ($errors->has('email'))
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center ml-5">
                             <div class="cal-xs-4">
                                 <span style="color:red">{{ $errors->first('email') }}</span>
                             </div>
                         </div>
                     @endif
+                    <input type="text" name="email" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                 </div>
+                
+                <br>
                 
                 <br>
                 
                 <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">パスワード</p>
-                    <input type="text" name="password" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                     @if ($errors->has('password'))
-                        <div class="row justify-content-center">
+                        <div class="row justify-content-center ml-5">
                             <div class="cal-xs-4">
                                 <span style="color:red">{{ $errors->first('password') }}</span>
                             </div>
                         </div>
                     @endif
+                    <input type="text" name="password" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                 </div>
+                
+                <br>
                 
                 <br>
                 
                 <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">パスワード再入力</p>
-                    <input type="password" name="password_confirmation" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                     @if ($errors->has('password_confirmation'))
                         <div class="row justify-content-center">
                             <div class="cal-xs-4">
@@ -126,7 +148,10 @@
                             </div>
                         </div>
                     @endif
+                    <input type="password" name="password_confirmation" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                 </div>
+                
+                <br>
                 
                 <br>
                 

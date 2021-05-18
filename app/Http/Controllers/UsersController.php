@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Sex;
 use App\Models\Tweet;
@@ -82,6 +83,7 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $user = Auth::user()->id;
         return view('users.edit', ['user' => $user]);
     }
 
@@ -115,9 +117,16 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/');
     }
     
+    public function delete_confirm($id)
+    {
+        return view('users.delete_confirm');
+    }
+
     // フォロー
     public function follow(User $user)
     {

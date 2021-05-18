@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +28,8 @@ class User extends Authenticatable
         'residence',
         'profile_image'
     ];
+    
+    protected $dates = ['deleted_at'];
 
     /**
      * The attributes that should be hidden for arrays.

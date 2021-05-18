@@ -45,3 +45,8 @@ Route::group(['middleware' => 'auth'], function() {
     // いいね関連
     Route::resource('favorites', 'FavoritesController', ['only' => ['store', 'destroy']]);
 });
+
+Route::group(['prefix' => 'users/{id}'], function () {
+    Route::get('delete_confirm', 'UsersController@delete_confirm')->name('delete_confirm');
+    Route::delete('destroy', 'UsersController@destroy')->name('destroy');
+});

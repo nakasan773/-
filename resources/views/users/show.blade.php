@@ -23,6 +23,11 @@
                                 <div>
                                     @if ($user->id === Auth::user()->id)
                                         <a href="{{ url('users/' .$user->id .'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
+                                        
+                                        <a href="{{ url('users/' .$user->id .'/delete_confirm') }}" class="btn btn-danger">退会する</a>
+                                        
+                
+                        
                                     @else
                                         @if ($is_following)
                                             <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
