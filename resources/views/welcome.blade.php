@@ -2,60 +2,38 @@
 
 @section('content')
 
-    @if (Auth::check())
+    @if(Auth::check())
     
         <br>
         
         <br>
     
-        <h1>ようこそ！！{{ Auth::user()->name }}さん</h1>
+        <h2><b> ようこそ！！{{ Auth::user()->name }}さん </b></h2>
         
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    @foreach ($all_users as $user)
-                        <div class="card">
-                            <div class="card-haeder p-3 w-100 d-flex">
-                                <img src="{{ $user->profile_image }}" class="rounded-circle" width="50" height="50">
-                                <div class="ml-2 d-flex flex-column">
-                                    <p class="mb-0">{{ $user->name }}</p>
-                                    <a href="{{ url('users/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>
-                                </div>
-                                @if (auth()->user()->isFollowed($user->id))
-                                    <div class="px-2">
-                                        <span class="px-1 bg-secondary text-light">フォローされています</span>
-                                    </div>
-                                @endif
-                                <div class="d-flex justify-content-end flex-grow-1">
-                                    @if (auth()->user()->isFollowing($user->id))
-                                        <form action="{{ route('unfollow', ['id' => $user->id]) }}" method="POST">
-                                            {{ csrf_field() }}
-                                            {{ method_field('DELETE') }}
+        <br>
         
-                                            <button type="submit" class="btn btn-danger">フォロー解除</button>
-                                        </form>
-                                    @else
-                                        <form action="{{ route('follow', ['id' => $user->id]) }}" method="POST">
-                                            {{ csrf_field() }}
+        <h4>みんなの投稿を見てみよう！</h4>
+        <a href="{{ url('/users') }}">さっそく見てみる🔎</a>
         
-                                            <button type="submit" class="btn btn-primary">フォローする</button>
-                                        </form>
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            <div class="my-4 d-flex justify-content-center">
-                {{ $all_users->links() }}
-            </div>
-        </div>
     
     @else
     
-        @include('users.guest')
+        <div class="container mt-5 pt-5 text-center">
+            <span class="display-4 font-weight-bold">人から人へつながる旅</span>
+        </div>
+        
+        <div class="row justify-content-center mt-5">
+            <div class="col-4 text-center">
+                <h3>まだアカウントを<br>お持ちでない方はこちら</h3>
+                <button type="button" class="btn btn-primary mt-5" onclick=location.href='signup' style="width:120px;height:50px">新規登録</button>
+            </div>
+            
+            <div class="col-4 text-center">
+                <h3>すでにアカウントを<br>お持ちの方はこちら</h3>
+                <button type="button" class="btn btn-primary mt-5" onclick=location.href='login' style="width:120px;height:50px">ログイン</button>
+            </div>
+        </div>
     
     @endif
-
+       
 @endsection

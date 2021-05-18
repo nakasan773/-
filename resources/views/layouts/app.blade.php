@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"><!--//追記-->
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"><!--//追記-->
         <link rel="dns-prefetch" href="//fonts.gstatic.com"><!--//追記-->
-        <link rel="stylesheet" href="/css/styles.css">
+        <link rel="stylesheet" href="{{ asset('/css/styles.css') }}">
         <script src="{{ asset('js/app.js') }}"></script><!--//追記-->
 
         <title>{{ config('app.name', 'Laravel') }}</title>

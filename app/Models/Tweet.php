@@ -47,4 +47,56 @@ class Tweet extends Model
     {
         return $this->hasMany(Comment::class);
     }
+    
+                                                            //--ここからTweetsController（index）--    
+    // 一覧画面
+    public function getTimeLines(Int $user_id, Array $follow_ids)
+    {
+        // 自身とフォローしているユーザIDを結合する
+        $follow_ids[] = $user_id;
+        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(50);
+    }
+    
+                                                            //--ここからTweetsController（show）--
+    // 詳細画面
+    public function getTweet(Int $tweet_id)
+    {
+        return $this->with('user')->where('id', $tweet_id)->first();
+    }
+    
+                                                            //--ここからTweetsController（store）--
+    //一覧画面（編集バリデーション）
+    public function tweetStore(Int $user_id, Array $data)
+    {
+        $this->user_id = $user_id;
+        $this->text = $data['text'];
+        $this->save();
+
+        return;
+    }
+    
+                                                            //--ここからTweetsController（edit）--
+    //編集画面
+    public function getEditTweet(Int $user_id, Int $tweet_id)
+    {
+        return $this->where('user_id', $user_id)->where('id', $tweet_id)->first();
+    }
+    
+                                                            //--ここからTweetsController（update）--
+    //一覧画面（アップデート処理）
+    public function tweetUpdate(Int $tweet_id, Array $data)
+    {
+        $this->id = $tweet_id;
+        $this->text = $data['text'];
+        $this->update();
+
+        return;
+    }
+    
+                                                            //--ここからTweetsController（destroy）--
+    //削除
+    public function tweetDestroy(Int $user_id, Int $tweet_id)
+    {
+        return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();
+    }
 }

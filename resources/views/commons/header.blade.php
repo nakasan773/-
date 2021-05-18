@@ -1,16 +1,19 @@
 <header>
-    <h1><a href="/">観光地シェアサイト</a></h1>
+    <h1><a href="/users">観光地シェアサイト</a></h1>
     
     @if (Auth::check())
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
+                <li class="nav-item mr-5">
+                    <a href="{{ url('tweets/create') }}" class="btn btn-md btn-primary">ツイートする</a>
+                </li>
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto align-items-center">
                     <li class="nav-item">
-                        <img src="{{ auth()->user()->profile_image }}" class="rounded-circle" width="50" height="50">
+                        <img src="{{ asset('storage/profile_image/' .auth()->user()->profile_image) }}" class="rounded-circle" width="50" height="50">
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
