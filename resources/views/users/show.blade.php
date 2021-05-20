@@ -70,6 +70,9 @@
             </div>
             @if (isset($timelines))
                 @foreach ($timelines as $timeline)
+                
+                
+                
                     <div class="col-md-8 mb-3">
                         <div class="card">
                             <div class="card-haeder p-3 w-100 d-flex">
@@ -84,6 +87,7 @@
                             </div>
                             <div class="card-body">
                                 {{ $timeline->text }}
+                                <img src="{{ url('storage/images/' .$timeline->image) }}">
                             </div>
                             <div class="card-footer py-1 d-flex justify-content-end bg-white">
                                 @if ($timeline->user->id === Auth::user()->id)

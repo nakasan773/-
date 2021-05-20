@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Tweet extends Model
 {
     use SoftDeletes;
+    
 
     /**
      * The attributes that are mass assignable.
@@ -15,20 +16,9 @@ class Tweet extends Model
      * @var array
      */
     protected $fillable = [
-        'text'
+        'text',
+        'image'
     ];
-    
-    //ページネーション（カウント）ユーザー数
-    public function getUserTimeLine(Int $user_id)
-    {
-        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(50);
-    }
-
-    //ページネーション（カウント）ツイート
-    public function getTweetCount(Int $user_id)
-    {
-        return $this->where('user_id', $user_id)->count();
-    }
     
     //Userモデルを親に持つことを明記
     public function user()
@@ -48,42 +38,59 @@ class Tweet extends Model
         return $this->hasMany(Comment::class);
     }
     
-                                                            //--ここからTweetsController（index）--    
-    // 一覧画面
-    public function getTimeLines(Int $user_id, Array $follow_ids)
+    //ページネーション（カウント）ユーザー数
+    public function getUserTimeLine(Int $user_id)
     {
-        // 自身とフォローしているユーザIDを結合する
-        $follow_ids[] = $user_id;
-        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(50);
+        return $this->where('user_id', $user_id)->orderBy('created_at', 'DESC')->paginate(50);
+    }
+
+    //ページネーション（カウント）ツイート
+    public function getTweetCount(Int $user_id)
+    {
+        return $this->where('user_id', $user_id)->count();
     }
     
-                                                            //--ここからTweetsController（show）--
     // 詳細画面
     public function getTweet(Int $tweet_id)
     {
         return $this->with('user')->where('id', $tweet_id)->first();
     }
     
-                                                            //--ここからTweetsController（store）--
-    //一覧画面（編集バリデーション）
+    // 一覧画面
+    public function getTimeLines(Int $user_id, Array $follow_ids)
+    {
+        $follow_ids[] = $user_id;
+        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(50);
+    }
+
+
     public function tweetStore(Int $user_id, Array $data)
     {
         $this->user_id = $user_id;
         $this->text = $data['text'];
+        
+        
+        //$file = $data->file('image');
+        //$file_name = $file->getClientOriginalName();
+        
+        //$this->image = $filename;
+        
+        //$file_name = $data['image'];
+        //$file_name->store('public/images', $file_name);
+        
+        //$this->image = $data['image'];
+        
+        
         $this->save();
 
         return;
     }
-    
-                                                            //--ここからTweetsController（edit）--
-    //編集画面
+
     public function getEditTweet(Int $user_id, Int $tweet_id)
     {
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->first();
     }
     
-                                                            //--ここからTweetsController（update）--
-    //一覧画面（アップデート処理）
     public function tweetUpdate(Int $tweet_id, Array $data)
     {
         $this->id = $tweet_id;
@@ -92,9 +99,7 @@ class Tweet extends Model
 
         return;
     }
-    
-                                                            //--ここからTweetsController（destroy）--
-    //削除
+
     public function tweetDestroy(Int $user_id, Int $tweet_id)
     {
         return $this->where('user_id', $user_id)->where('id', $tweet_id)->delete();

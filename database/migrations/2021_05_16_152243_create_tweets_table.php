@@ -19,13 +19,15 @@ class CreateTweetsTable extends Migration
             $table->unsignedInteger('user_id')->comment('ユーザID');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
-            $table->string('text')->comment('本文');
+            $table->string('text')->comment('投稿ツイート');
+            $table->string('image')->nullable()->comment('投稿画像');
             $table->softDeletes();
             $table->timestamps();
 
             $table->index('id');
             $table->index('user_id');
             $table->index('text');
+            $table->index('image');
         });
     }
 

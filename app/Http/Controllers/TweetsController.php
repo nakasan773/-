@@ -53,14 +53,39 @@ class TweetsController extends Controller
     public function store(Request $request, Tweet $tweet)
     {
         $user = auth()->user();
+        
         $data = $request->all();
+         
+        //$filename = $data->file('image')->getClientOriginalName();
+        //dd($filename);
+        //$textname = $data['text'];
+        
+        
         $validator = Validator::make($data, [
-            'text' => ['required', 'string', 'max:140']
+            'text' => ['required', 'string', 'max:140'],
+            'image' => ['required', 'string', 'file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
         ]);
-
-        $validator->validate();
+        
+        $tweet = new Tweet();
+        
         $tweet->tweetStore($user->id, $data);
-
+        
+        
+        
+        
+        //投稿した画像をDBに格納させる
+        if($request->file('image')->isValid()) {
+            $filename = $request->file('image')->getClientOriginalName();
+            $request->image->storeAs('public/images/', date("Ymd").'_'.$filename);
+            $tweet->image = date("Ymd").'_'.$filename;
+        }
+        
+        //$imagename = $filename->getClientOriginalName()->store('public/images');    //storageフォルダに投稿した画像を保存しファイルパスを格納
+        //$imagefile = $imagename->->store('public/image_file/');
+               //ファイル名から「public/」を取り除く
+        $tweet->save();
+        
+        
         return redirect('tweets');
     }
 
