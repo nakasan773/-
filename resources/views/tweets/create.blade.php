@@ -26,7 +26,9 @@
                                 </div>
                                 <div class="col-md-12">
                                     <textarea class="form-control @error('text') is-invalid @enderror" name="text" required autocomplete="text" rows="4">{{ old('text') }}</textarea>
-    
+                                    <div class="col-md-12 text-right">
+                                        <p class="mb-4 text-danger">140文字以内</p>
+                                    </div>
                                     @error('text')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -35,7 +37,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-md-12">
+                            <div class="col-ms-2 mt-3">
                                 <input id="image" type="file" name="image" autocomplete="image" rows="4">
 
                                 @error('image')
@@ -44,10 +46,21 @@
                                     </span>
                                 @enderror
                             </div>
+                            
+                             <select class="form-control-sm col-sm-2 mt-3 d-inline" id="changeSelect" name="city_id" onchange="entryChange2();">
+                                @error('city')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                <option value="">未選択</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->city }}</option>
+                                @endforeach
+                            </select>
     
                             <div class="form-group row mb-0">
                                 <div class="col-md-12 text-right">
-                                    <p class="mb-4 text-danger">140文字以内</p>
                                     <button type="submit" class="btn btn-primary">
                                         ツイートする
                                     </button>

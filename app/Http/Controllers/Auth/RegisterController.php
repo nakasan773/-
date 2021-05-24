@@ -54,8 +54,8 @@ class RegisterController extends Controller
             'screen_name' => ['required', 'string', 'min:6', 'max:50'],
             'name' => ['required', 'string', 'min:1', 'max:15'],
             'age' => ['required', 'string', 'max:200'],
-            'user_sexes_id' => ['required'],
-            'residence' => ['required', 'max:30'],
+            'user_sex_id' => ['required'],
+            'single_comment' => ['required', 'string', 'min:1', 'max:15'],
             'email' => ['required', 'string', 'unique:users','email'],
             'password' => ['required', 'string', 'min:6', 'max:15', 'confirmed'],
         ]);
@@ -73,8 +73,8 @@ class RegisterController extends Controller
                 'screen_name' => $data['screen_name'],
                 'name' => $data['name'],
                 'age' => $data['age'],
-                'user_sexes_id' => $data['user_sexes_id'],
-                'residence' => $data['residence'],
+                'user_sex_id' => $data['user_sex_id'],
+                'single_comment' => $data['single_comment'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
         ]);

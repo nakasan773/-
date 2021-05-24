@@ -11,6 +11,13 @@
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"><!--//追記-->
         <link rel="dns-prefetch" href="//fonts.gstatic.com"><!--//追記-->
         <link rel="stylesheet" href="/css/styles.css">
+        <!--トップページの--><!--
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
+        <link href="css/ress.css" media="all" rel="stylesheet" type="text/css" />
+        <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
+        <link rel="shortcut icon" href="img/favicon.ico" />
+        -->
+        
         <script src="{{ asset('js/app.js') }}"></script><!--//追記-->
         @livewireStyles
 
@@ -21,20 +28,21 @@
     <body>
 
         <div class="wrapper">
-            @include('commons.header')
+        @include('commons.header')
 
-                <div class="container">
+            <div class="container">
 
-                    @include('commons.error_messages')
+                @include('commons.error_messages')
 
-                    @yield('content')
+                @yield('content')
 
-                </div>
-            
-            @livewireScripts
-            @include('commons.footer')
+            </div>
+        
+        @livewireScripts
+        @include('commons.footer')
         </div>
-
+        //<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        //<script type='text/javascript' src="js/script.js"></script>
     </body>
     
 </html>

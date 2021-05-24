@@ -151,9 +151,10 @@ return [
         'comment'=>'コメント',
         'birthday'=>'生年月日',
         'user_sexes_id'=>'性別',
-        'residence'=>'居住地',
+        'city'=>'場所',
         'email'=>'メールアドレス',
         'password'=>'パスワード',
         'password_confirmation'=>'パスワード確認',
+        'single_comment'=>'ひとこと'
     ],
 ];

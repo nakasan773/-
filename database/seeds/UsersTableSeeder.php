@@ -20,8 +20,8 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('12345678'),
                 'profile_image'  => 'https://placehold.jp/50x50.png',
                 'age' => '2' .$i,
-                'user_sexes_id' => 1,
-                'residence' => '北海道',
+                'single_comment' => 'ひとこと' .$i,
+                'user_sex_id' => 1,
                 'remember_token' => str_random(10),
                 'created_at'  => now(),
                 'updated_at' => now()

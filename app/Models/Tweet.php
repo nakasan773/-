@@ -25,6 +25,18 @@ class Tweet extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+    //Cityモデルを親に持つことを明記
+    //public function city()
+    //{
+    //    return $this->belongsTo(City::class, 'city_id'); 
+    //}
+    
+    //Cityモデルを親に持つことを明記
+    public function city()
+    {
+        return $this->belongsTo(City::class); 
+    }
 
     //Followerモデルを子に持つことを明記
     public function favorites()
@@ -60,7 +72,8 @@ class Tweet extends Model
     public function getTimeLines(Int $user_id, Array $follow_ids)
     {
         $follow_ids[] = $user_id;
-        return $this->whereIn('user_id', $follow_ids)->orderBy('created_at', 'DESC')->paginate(50);
+        
+        return $this->whereIn('user_id', $follow_ids)->with('city')->orderBy('created_at', 'DESC')->paginate(50);
     }
 
 

@@ -32,6 +32,15 @@ Route::group(['middleware' => 'auth'], function() {
     // ユーザ関連
     Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'edit', 'update']]);
     
+    
+    //退会機能【未】
+    Route::get('users/{id}/delete_confirm', 'UsersController@delete_confirm')->name('delete_confirm');
+    Route::resource('users', 'UsersController', ['only' => ['destroy']]);
+
+//Route::group(['middleware' => 'auth'], function () {
+  //  Route::resource('users', 'UsersController', ['only' => ['destroy']]);
+//});
+    
     // フォロー/フォロー解除を追加
     Route::post('users/{user}/follow', 'UsersController@follow')->name('follow');
     Route::delete('users/{user}/unfollow', 'UsersController@unfollow')->name('unfollow');
@@ -44,11 +53,5 @@ Route::group(['middleware' => 'auth'], function() {
     
     // いいね関連
     Route::resource('favorites', 'FavoritesController', ['only' => ['store', 'destroy']]);
-});
-
-//退会機能【未】
-Route::group(['prefix' => 'users/{id}'], function () {
-    Route::get('delete_confirm', 'UsersController@delete_confirm')->name('delete_confirm');
-    Route::delete('destroy', 'UsersController@destroy')->name('destroy');
 });
 

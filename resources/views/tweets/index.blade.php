@@ -5,9 +5,20 @@
     <br>
     
     <br>
-
+    
+    <br>
+    
+    <div class="text-center">
+        <h2>みんなの投稿</h2>
+    </div>
+    
+    <br>
+    
     <div class="container">
         <div class="row justify-content-center">
+            
+            
+            
             <div class="col-md-8 mb-3 text-right">
                 <a href="{{ url('users') }}">ユーザ一覧 <i class="fas fa-users" class="fa-fw"></i> </a>
             </div>
@@ -15,7 +26,9 @@
                 @foreach ($timelines as $timeline)
                     <div class="col-md-8 mb-3">
                         <div class="card">
-                            <div class="card-haeder p-3 w-100 d-flex">
+                            
+                            <!--カードヘッダーここから-->
+                            <div class="card-header p-3 w-100 d-flex">
                                 <img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
                                 <div class="ml-2 d-flex flex-column">
                                     <p class="mb-0">{{ $timeline->user->name }}</p>
@@ -25,13 +38,32 @@
                                     <p class="mb-0 text-secondary">{{ $timeline->created_at->format('Y-m-d H:i') }}</p>
                                 </div>
                             </div>
+                            <!--カードヘッダーここまで-->
+                            
+                            
+                            
+                            <!--カードボディここから-->
                             <div class="card-body">
-                                {!! nl2br(e($timeline->text)) !!}
-                                <img src="{{ url('storage/images/' .$timeline->image) }}">
+                                
+                                <div class="text-center">
+                                    <img src="{{ url('storage/images/' .$timeline->image) }}">
+                                </div>
+                                <div class="justify-content-flex-start">
+                                    {!! nl2br(e($timeline->text)) !!}
+                                    {{ $timeline->city_id->city }}
+                                
+                                </div>
+                                
                             </div>
+                            <!--カードヘッダーここまで-->
+                            
+                            
+                            <!--カードフッダーここから-->
                             <div class="card-footer py-1 d-flex justify-content-end bg-white">
-                                @if ($timeline->user->id === Auth::user()->id)
-                                    <div class="dropdown mr-3 d-flex align-items-center">
+                                <div class="dropdown mr-3 d-flex align-items-center">
+                                    
+                                <!--詳細アイコンーここから-->
+                                    @if ($timeline->user->id === Auth::user()->id)
                                         <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v fa-fw"></i>
                                         </a>
@@ -44,14 +76,18 @@
                                                 <button type="submit" class="dropdown-item del-btn">削除</button>
                                             </form>
                                         </div>
-                                    </div>
-                                @endif
+                                        
+                                    @endif
+                                </div>
+                                <!--詳細アイコンーここまで-->
+                            
+                                
+
                                 <div class="mr-3 d-flex align-items-center">
                                     <a href="{{ url('tweets/' .$timeline->id) }}"><i class="far fa-comment fa-fw"></i></a>
                                     <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
                                 </div>
-                                
-                                    <!-- ここから -->
+
                                 <div class="d-flex align-items-center">
                                     @if (!in_array($user->id, array_column($timeline->favorites->toArray(), 'user_id'), TRUE))
                                         <form method="POST" action="{{ url('favorites/') }}" class="mb-0">
@@ -70,9 +106,14 @@
                                     @endif
                                     <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>
                                 </div>
-                                <!-- ここまで -->
+                
 
                             </div>
+                            
+                            <!--カードフッダーここまで-->
+                            
+                            
+                            
                         </div>
                     </div>
                 @endforeach
@@ -81,6 +122,12 @@
         <div class="my-4 d-flex justify-content-center">
             {{ $timelines->links() }}
         </div>
+        
+        <!--
+        <div class="page-top" id="js-page-top">
+            <span class="material-icons-outlined">expand_less</span>
+        </div>
+        -->
     </div>
 
 @endsection

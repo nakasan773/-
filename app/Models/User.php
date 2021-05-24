@@ -23,9 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user_sexes_id',
+        'user_sex_id',
         'age',
-        'residence',
+        'single_comment',
         'profile_image'
     ];
     
@@ -58,7 +58,7 @@ class User extends Authenticatable
     // Sexモデルを親に持つことを明記
     public function sex()
     {
-        return $this->belongsTo('App\Sex');
+        return $this->belongsTo(Sex::class);//'App\Sex'
     }
     
     // リレーション
@@ -105,17 +105,19 @@ class User extends Authenticatable
 
             $this::where('id', $this->id)
                 ->update([
-                    'screen_name'   => $params['screen_name'],
-                    'name'          => $params['name'],
-                    'profile_image' => basename($file_name),
-                    'email'         => $params['email'],
+                    'screen_name'    => $params['screen_name'],
+                    'name'           => $params['name'],
+                    'single_comment' => $params['single_comment'],
+                    'profile_image'  => basename($file_name),
+                    'email'          => $params['email'],
                 ]);
         } else {
             $this::where('id', $this->id)
                 ->update([
-                    'screen_name'   => $params['screen_name'],
-                    'name'          => $params['name'],
-                    'email'         => $params['email'],
+                    'screen_name'    => $params['screen_name'],
+                    'name'           => $params['name'],
+                    'single_comment' => $params['single_comment'],
+                    'email'          => $params['email'],
                 ]); 
         }
 

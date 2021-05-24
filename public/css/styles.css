@@ -74,3 +74,11 @@ header nav {
       width: 100%;
       margin: 0 !important;
 }
+
+.page-top {
+  font-weight: bold;
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #CCCCCC;
+}

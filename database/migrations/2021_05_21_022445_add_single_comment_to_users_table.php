@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnSoftDeletesUsersTable extends Migration
+class AddSingleCommentToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddColumnSoftDeletesUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->softDeletes();
+            $table->string('single_comment')->nullable()->comment('一言');
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnSoftDeletesUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('deleted_at');
+            //
         });
     }
 }

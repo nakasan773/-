@@ -18,10 +18,10 @@
                             @method('PUT')
     
                             <div class="form-group row align-items-center">
-                                <label for="profile_image" class="col-md-4 col-form-label text-md-right">{{ __('Profile Image') }}</label>
+                                <label for="profile_image" class="col-md-4 col-form-label text-md-right">{{ __('プロフィール画像') }}</label>
     
                                 <div class="col-md-6 d-flex align-items-center">
-                                    <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="mr-2 rounded-circle" width="80" height="80" alt="profile_image">
+                                    <img src="{{ url('storage/profile_image/' .$user->profile_image) }}" class="mr-2 rounded-circle" width="80" height="80" alt="">
                                     <input type="file" name="profile_image" class="@error('profile_image') is-invalid @enderror" autocomplete="profile_image">
     
                                     @error('profile_image')
@@ -33,7 +33,7 @@
                             </div>
     
                             <div class="form-group row">
-                                <label for="screen_name" class="col-md-4 col-form-label text-md-right">{{ __('Account Name') }}</label>
+                                <label for="screen_name" class="col-md-4 col-form-label text-md-right">{{ __('アカウントID') }}</label>
     
                                 <div class="col-md-6">
                                     <input id="screen_name" type="text" class="form-control @error('screen_name') is-invalid @enderror" name="screen_name" value="{{ $user->screen_name }}" required autocomplete="screen_name" autofocus>
@@ -47,7 +47,7 @@
                             </div>
     
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ユーザー名') }}</label>
     
                                 <div class="col-md-6">
                                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autocomplete="name" autofocus>
@@ -59,9 +59,20 @@
                                     @enderror
                                 </div>
                             </div>
-    
+                            
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                                <label for="single_comment" class="col-md-4 col-form-label text-md-right">{{ __('ひとこと') }}</label>
+    
+                                <div class="col-md-6">
+                                    <input id="single_comment" type="text" class="form-control @error('single_comment') is-invalid @enderror" name="single_comment" value="{{ $user->single_comment }}" autocomplete="single_comment">
+    
+                                   
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="form-group row">
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Eメールアドレス') }}</label>
     
                                 <div class="col-md-6">
                                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email">

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Tweet;
 use App\Models\Comment;
 use App\Models\Follower;
+use App\Models\City;
 
 class TweetsController extends Controller
 {
@@ -18,15 +19,59 @@ class TweetsController extends Controller
     public function index(Tweet $tweet, Follower $follower)
     {
         $user = auth()->user();
+        //$test2 = Tweet::all();
+        //$test2 = Tweet::with('cities')->where('city_id', $tweet->id);
+        //dd($test2);
+        
+        //dd($collection);
+        
+        //dd($city);
+        
+        //->with('cities', 'tweets.city_id', '=', 'cities.id')->get();
+        
         $follow_ids = $follower->followingIds($user->id);
         // followed_idだけ抜き出す
         $following_ids = $follow_ids->pluck('followed_id')->toArray();
-
-        $timelines = $tweet->getTimelines($user->id, $following_ids);
-
+        
+        
+        $timelines = $tweet->with('cities')->where('city_id', $tweet->id)->getTimelines($user->id, $following_ids);
+        
+    
+        //$tweet = Tweet::all();
+        
+        //$timelines = $tweet->with(['city' => function ($query) use($prefecture_id) {
+        //$query->where('id', $prefecture_id);
+        //}]) 
+        //->get();
+        
+        //->with('city', function ($query) {
+        //$query->where('ci', 'like', 'foo%');
+        //})->get();
+        
+        //$allfollowing_ids = $following_ids->getTweetCity($tweet->id);
+        //
+        
+        //with('city')->where('city_id', $tweet->id)->
+        
+        
+        //$cityNames = $city->getCity($user->id, $following_ids);
+        
+        //$tweetId = Tweet::all();
+        
+        
+        //$cityNames = City::find($tweetId->city_id);
+        //dd($cityNames);
+        
+        //foreach ($cityNames as $cityName) {
+        //$cityprace = City::find($cityName->cities_id);
+        //}
+        
         return view('tweets.index', [
             'user' => $user,
-            'timelines' => $timelines
+            'timelines' => $timelines,
+            //'cityNames' => $cityNames,
+            //'cityprace' => $cityprace,
+            //'city' => $city,
         ]);
     }
 
@@ -40,6 +85,7 @@ class TweetsController extends Controller
         $user = auth()->user();
 
         return view('tweets.create', [
+            'cities' => City::all(),
             'user' => $user
         ]);
     }
@@ -64,14 +110,13 @@ class TweetsController extends Controller
         $validator = Validator::make($data, [
             'text' => ['required', 'string', 'max:140'],
             'image' => ['required', 'string', 'file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'city_id' => ['required']
         ]);
         
         $tweet = new Tweet();
         
         $tweet->tweetStore($user->id, $data);
-        
-        
-        
+        $tweet->city_id = $data['city_id'];
         
         //投稿した画像をDBに格納させる
         if($request->file('image')->isValid()) {
@@ -99,12 +144,15 @@ class TweetsController extends Controller
     {
         $user = auth()->user();
         $tweet = $tweet->getTweet($tweet->id);
+        
         $comments = $comment->getComments($tweet->id);
+        $cityname = City::find($tweet->city_id);
 
         return view('tweets.show', [
             'user' => $user,
             'tweet' => $tweet,
-            'comments' => $comments
+            'comments' => $comments,
+            'cityname' => $cityname,
         ]);
     }
 

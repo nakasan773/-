@@ -1,5 +1,5 @@
 <header>
-    <h1><a href="/users">観光地シェアサイト</a></h1>
+    <h1><a href="/users" class="ml-4">観光地シェアサイト</a></h1>
     
     @if (Auth::check())
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">

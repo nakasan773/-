@@ -13,8 +13,11 @@
         <br>
         
         <h4>みんなの投稿を見てみよう！</h4>
-        <a href="{{ url('/users') }}">さっそく見てみる🔎</a>
+        <a href="{{ url('/tweets') }}">さっそく見てみる🔎</a>
         
+        <br>
+        
+        <a href="{{ url('/users') }}">ユーザー一覧へ🔎</a>
     
     @else
     

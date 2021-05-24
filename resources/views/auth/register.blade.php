@@ -18,7 +18,7 @@
                 <br>
                 
                 <div class="mt-1 clearfix">
-                    <p class="d-inline ml-2">アカウントID</a>
+                    <p class="d-inline ml-2">アカウントID（6桁以上）</a>
                     @if ($errors->has('screen_name'))
                         <div class="row justify-content-center">
                             <div class="cal-xs-4">
@@ -34,7 +34,7 @@
                 <br>
                 
                 <div class="mt-1 clearfix">
-                    <p class="d-inline ml-2">ユーザー名</a>
+                    <p class="d-inline ml-2">ユーザー名（15字以内）</a>
                     @if ($errors->has('name'))
                         <div class="row justify-content-center ml-5">
                             <div class="cal-xs-4">
@@ -71,14 +71,14 @@
                 <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">性別</p>
                     
-                    @if ($errors->has('user_sexes_id'))
+                    @if ($errors->has('user_sex_id'))
                         <div class="row justify-content-center">
                             <div class="cal-xs-4">
-                                <span style="color:red">{{ $errors->first('user_sexes_id') }}</span>
+                                <span style="color:red">{{ $errors->first('user_sex_id') }}</span>
                             </div>
                         </div>
                     @endif
-                    <select class="form-control-sm col-sm-8 ml-5 d-inline float-right" id="changeSelect" name="user_sexes_id" onchange="entryChange2();">
+                    <select class="form-control-sm col-sm-8 ml-5 d-inline float-right" id="changeSelect" name="user_sex_id" onchange="entryChange2();">
                         <option value="">未選択</option>
                         @foreach ($sexes as $sex)
                             <option value="{{ $sex->id }}">{{ $sex->sex }}</option>
@@ -92,15 +92,15 @@
                 <br>
                 
                 <div class="mt-1 clearfix">
-                    <p class="d-inline ml-2">居住地</p>
-                    @if ($errors->has('residence'))
-                        <div class="row justify-content-center">
+                    <p class="d-inline ml-2">ひとこと（15字以内）</p>
+                    @if ($errors->has('single_comment'))
+                        <div class="row justify-content-center ml-5">
                             <div class="cal-xs-4">
-                                <span style="color:red">{{ $errors->first('residence') }}</span>
+                                <span style="color:red">{{ $errors->first('single_comment') }}</span>
                             </div>
                         </div>
                     @endif
-                    <input type="text" name="residence" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
+                    <input type="text" name="single_comment" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
                 </div>
                 
                 <br>
@@ -124,7 +124,7 @@
                 <br>
                 
                 <div class="mt-1 clearfix">
-                    <p class="d-inline ml-2">パスワード</p>
+                    <p class="d-inline ml-2">パスワード（6桁以上）</p>
                     @if ($errors->has('password'))
                         <div class="row justify-content-center ml-5">
                             <div class="cal-xs-4">

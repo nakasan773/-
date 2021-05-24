@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
-use App\Sex;
-use App\Models\Tweet;
 use App\Models\Follower;
+use App\Models\User;
+use App\Models\Tweet;
+use App\Models\City;
+use App\Sex;
 
 class UsersController extends Controller
 {
@@ -83,7 +83,6 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        $user = Auth::user()->id;
         return view('users.edit', ['user' => $user]);
     }
 
@@ -98,10 +97,11 @@ class UsersController extends Controller
     {
         $data = $request->all();
         $validator = Validator::make($data, [
-            'screen_name'   => ['required', 'string', 'min:6', 'max:50', Rule::unique('users')->ignore($user->id)],
-            'name'          => ['required', 'string', 'min:1', 'max:15'],
-            'profile_image' => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'email'         => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)]
+            'screen_name'    => ['required', 'string', 'min:6', 'max:50', Rule::unique('users')->ignore($user->id)],
+            'name'           => ['required', 'string', 'min:1', 'max:15'],
+            'single_comment' => ['required', 'string', 'min:1', 'max:15'],
+            'profile_image'  => ['file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
+            'email'          => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)]
         ]);
         $validator->validate();
         $user->updateProfile($data);
@@ -117,6 +117,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
+        dd($id);
         $user = User::find($id);
         $user->delete();
         return redirect('/');
@@ -124,6 +125,7 @@ class UsersController extends Controller
     
     public function delete_confirm($id)
     {
+        $user = User::find($id);
         return view('users.delete_confirm');
     }
 

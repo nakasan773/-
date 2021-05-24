@@ -21,6 +21,8 @@ class CreateTweetsTable extends Migration
 
             $table->string('text')->comment('投稿ツイート');
             $table->string('image')->nullable()->comment('投稿画像');
+            $table->integer('city_id')->unsigned()->nullable()->default(null);//都道府県
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
 
@@ -28,6 +30,7 @@ class CreateTweetsTable extends Migration
             $table->index('user_id');
             $table->index('text');
             $table->index('image');
+            $table->index('city_id');
         });
     }
 

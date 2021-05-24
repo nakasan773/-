@@ -21,8 +21,8 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        {!! nl2br(e($tweet->text)) !!}
-                        <img src="{{ url('storage/images/' .$timeline->image) }}">
+                        {!! nl2br(e($tweet->text)) !!} {{ $cityname->city }}
+                        <img src="{{ url('storage/images/' .$tweet->image) }}">
                     </div>
                     <div class="card-footer py-1 d-flex justify-content-end bg-white">
                         @if ($tweet->user->id === Auth::user()->id)
@@ -41,6 +41,7 @@
                                 </div>
                             </div>
                         @endif
+                        
                         <div class="mr-3 d-flex align-items-center">
                             <a href="{{ url('tweets/' .$tweet->id) }}"><i class="far fa-comment fa-fw"></i></a>
                             <p class="mb-0 text-secondary">{{ count($tweet->comments) }}</p>
