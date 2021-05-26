@@ -32,10 +32,12 @@ Route::group(['middleware' => 'auth'], function() {
     // ユーザ関連
     Route::resource('users', 'UsersController', ['only' => ['index', 'show', 'edit', 'update']]);
     
+    Route::get('users/{id}/favorite', 'UsersController@favorite')->name('favorite');
+    
     
     //退会機能【未】
     Route::get('users/{id}/delete_confirm', 'UsersController@delete_confirm')->name('delete_confirm');
-    Route::resource('users', 'UsersController', ['only' => ['destroy']]);
+    Route::get('users/{id}/delete_confirm/destroy', 'UsersController@destroy')->name('destroy');
 
 //Route::group(['middleware' => 'auth'], function () {
   //  Route::resource('users', 'UsersController', ['only' => ['destroy']]);

@@ -74,6 +74,8 @@ class UsersController extends Controller
             'follower_count' => $follower_count
         ]);
     }
+    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -83,7 +85,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', ['user' => $user]);
+        return view('users.edit', [
+            'user' => $user]);
     }
 
     /**
@@ -108,6 +111,30 @@ class UsersController extends Controller
 
         return redirect('users/'.$user->id);
     }
+    
+    public function favorite(User $user, Tweet $tweet, Follower $follower, $id)
+    {
+        $user = User::find($id);
+        
+        $login_user = auth()->user();
+        
+        $is_following = $login_user->isFollowing($user->id);
+        $is_followed = $login_user->isFollowed($user->id);
+        $timelines = $tweet->getUserTimeLine($user->id);
+        $tweet_count = $tweet->getTweetCount($user->id);
+        $follow_count = $follower->getFollowCount($user->id);
+        $follower_count = $follower->getFollowerCount($user->id);
+
+        return view('users.favorite', [
+            'user'           => $user,
+            'is_following'   => $is_following,
+            'is_followed'    => $is_followed,
+            'timelines'      => $timelines,
+            'tweet_count'    => $tweet_count,
+            'follow_count'   => $follow_count,
+            'follower_count' => $follower_count
+        ]);
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -115,18 +142,20 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        dd($id);
-        $user = User::find($id);
-        $user->delete();
-        return redirect('/');
-    }
+     
     
     public function delete_confirm($id)
     {
         $user = User::find($id);
-        return view('users.delete_confirm');
+        return view('users.delete_confirm', [
+            'user' => $user]);
+    }
+    
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/');
     }
 
     // フォロー

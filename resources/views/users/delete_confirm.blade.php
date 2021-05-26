@@ -11,7 +11,7 @@
             <button type="button" class="btn btn-primary mt-5" onclick="history.back()" style="width:120px;height:50px">退会しない</button>
         </div>
         <div class="col-4 text-center">
-            <form action="{{ route('users.destroy', ['id' => Auth::user()->id]) }}" method="delete">
+            <form action="{{ route('destroy', ['id' => $user->id]) }}" method="delete">
             
                 <button type="submit" class="btn btn-primary mt-5" style="width:120px;height:50px">退会する</button>
             </form>

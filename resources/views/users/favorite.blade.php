@@ -7,7 +7,7 @@
     <br>
     
     <div class="text-center">
-        <h2><b>マイページ画面</b></h2>
+        <h2><b>お気に入り一覧画面</b></h2>
     </div>
     
     <br>
@@ -95,6 +95,7 @@
                 
                     <div class="col-md-4 mb-3">
                         <div class="card">
+                            
                             <div class="card-haeder p-3 w-100 d-flex">
                                 <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
                                 <div class="ml-2 d-flex flex-column flex-grow-1">

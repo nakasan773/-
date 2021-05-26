@@ -75,6 +75,11 @@ class Tweet extends Model
         
         return $this->whereIn('user_id', $follow_ids)->with('city')->orderBy('created_at', 'DESC')->paginate(50);
     }
+    
+    public function getCity()
+    {
+        return $this->with('city'); 
+    }
 
 
     public function tweetStore(Int $user_id, Array $data)

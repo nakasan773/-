@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\ValiRequests;
 use App\Models\Tweet;
 use App\Models\Comment;
 use App\Models\Follower;
@@ -29,14 +28,23 @@ class TweetsController extends Controller
         
         //->with('cities', 'tweets.city_id', '=', 'cities.id')->get();
         
-        $follow_ids = $follower->followingIds($user->id);
-        // followed_idだけ抜き出す
-        $following_ids = $follow_ids->pluck('followed_id')->toArray();
+        
+        //$timelines = $tweet->getCity();
+        //dd($timelines);
+        $timelines= Tweet::with('city')->orderBy('id','desc')->paginate(50); 
         
         
-        $timelines = $tweet->with('cities')->where('city_id', $tweet->id)->getTimelines($user->id, $following_ids);
         
-    
+        
+        
+        
+        //以下元データ
+        //$follow_ids = $follower->followingIds($user->id);
+        //followed_idだけ抜き出す
+        //$following_ids = $follow_ids->pluck('followed_id')->toArray();
+        //$timelines = $tweet->getTimelines($user->id, $following_ids);
+        //ここまで
+        
         //$tweet = Tweet::all();
         
         //$timelines = $tweet->with(['city' => function ($query) use($prefecture_id) {
@@ -96,7 +104,7 @@ class TweetsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Tweet $tweet)
+    public function store(ValiRequests $request, Tweet $tweet)
     {
         $user = auth()->user();
         
@@ -107,11 +115,7 @@ class TweetsController extends Controller
         //$textname = $data['text'];
         
         
-        $validator = Validator::make($data, [
-            'text' => ['required', 'string', 'max:140'],
-            'image' => ['required', 'string', 'file', 'image', 'mimes:jpeg,png,jpg', 'max:2048'],
-            'city_id' => ['required']
-        ]);
+    
         
         $tweet = new Tweet();
         

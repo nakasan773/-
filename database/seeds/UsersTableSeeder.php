@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'TEST' .$i,
                 'email'  => 'test' .$i .'@test.com',
                 'password' => Hash::make('12345678'),
-                'profile_image'  => 'https://placehold.jp/50x50.png',
+                'profile_image'  => 'noimage.png',
                 'age' => '2' .$i,
                 'single_comment' => 'ひとこと' .$i,
                 'user_sex_id' => 1,

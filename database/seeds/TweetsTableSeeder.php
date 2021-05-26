@@ -17,7 +17,7 @@ class TweetsTableSeeder extends Seeder
             Tweet::create([
                 'user_id'    => $i,
                 'text'       => 'これはテスト投稿' .$i,
-                'image'  => 'https://placehold.jp/50x50.png',
+                'image'  => 'sample.jpg',
                 'city_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()

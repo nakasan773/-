@@ -9,7 +9,7 @@
     <br>
     
     <div class="text-center">
-        <h2>みんなの投稿</h2>
+        <h2><b>全投稿一覧画面</b></h2>
     </div>
     
     <br>
@@ -29,7 +29,9 @@
                             
                             <!--カードヘッダーここから-->
                             <div class="card-header p-3 w-100 d-flex">
+                                
                                 <img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                                
                                 <div class="ml-2 d-flex flex-column">
                                     <p class="mb-0">{{ $timeline->user->name }}</p>
                                     <a href="{{ url('users/' .$timeline->user->id) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
@@ -46,11 +48,12 @@
                             <div class="card-body">
                                 
                                 <div class="text-center">
-                                    <img src="{{ url('storage/images/' .$timeline->image) }}">
+                                    <img src="{{ asset('storage/images/' .$timeline->image) }}">
                                 </div>
                                 <div class="justify-content-flex-start">
                                     {!! nl2br(e($timeline->text)) !!}
-                                    {{ $timeline->city_id->city }}
+                                    
+                                    {{ $timeline->city->city }}
                                 
                                 </div>
                                 
