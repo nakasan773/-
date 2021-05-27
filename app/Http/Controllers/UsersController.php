@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use App\Models\Follower;
+use App\Models\Favorite;
 use App\Models\User;
 use App\Models\Tweet;
 use App\Models\City;
@@ -112,18 +113,44 @@ class UsersController extends Controller
         return redirect('users/'.$user->id);
     }
     
-    public function favorite(User $user, Tweet $tweet, Follower $follower, $id)
+    public function favorite(User $user, Tweet $tweet, Follower $follower, Favorite $favorite, $id)
     {
         $user = User::find($id);
-        
+
         $login_user = auth()->user();
-        
+
         $is_following = $login_user->isFollowing($user->id);
         $is_followed = $login_user->isFollowed($user->id);
-        $timelines = $tweet->getUserTimeLine($user->id);
         $tweet_count = $tweet->getTweetCount($user->id);
         $follow_count = $follower->getFollowCount($user->id);
         $follower_count = $follower->getFollowerCount($user->id);
+        //$timelines = $tweet->getUserTimeLine($user->id);
+        //$test = $tweet->isFavorite($user->id);
+        
+        //$timelines = $tweet->getFavorite($user->id);
+        //dd($timelines);
+        //   $pick_user = User::get($id)->pluck('id')->toArray();
+        //$pick_user = $user->pluck('id')->toArray();
+        //   dd($pick_user);
+        
+        //$pick_user = User::pluck('id')->toArray();
+        //$favoritenumber = Favorite::whereIn('id', $pick_user);
+        //dd($favoritenumber->query()->id);
+
+        //$test = Tweet::all();
+        //$allfavorite = Favorite::all();
+        $pick_tweet = Favorite::pluck('tweet_id')->toArray();
+        //  dd($pick_favorite);
+        //$alltweet = Tweet::all();
+        //dd($allfavorite);
+        //where('id', $allfavorite->tweet_id)
+        //dd($test);
+        //if ($user->id == ) {
+            $timelines = Tweet::with('city')->whereIn('id', $pick_tweet)->orderBy('id','desc')->paginate(50);
+        //}
+        
+        //dd($timelines);
+        
 
         return view('users.favorite', [
             'user'           => $user,
@@ -132,7 +159,8 @@ class UsersController extends Controller
             'timelines'      => $timelines,
             'tweet_count'    => $tweet_count,
             'follow_count'   => $follow_count,
-            'follower_count' => $follower_count
+            'follower_count' => $follower_count,
+            'fvoritenumber'  => $favoritenumber,
         ]);
     }
 

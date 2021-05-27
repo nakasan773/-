@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValiRequests;
+use Illuminate\Http\Request;
 use App\Models\Tweet;
 use App\Models\Comment;
 use App\Models\Follower;
@@ -15,9 +16,11 @@ class TweetsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Tweet $tweet, Follower $follower)
+    public function index(Request $request, Tweet $tweet, Follower $follower)
     {
         $user = auth()->user();
+        
+        $allcities = City::get();
         //$test2 = Tweet::all();
         //$test2 = Tweet::with('cities')->where('city_id', $tweet->id);
         //dd($test2);
@@ -30,17 +33,26 @@ class TweetsController extends Controller
         
         
         //$timelines = $tweet->getCity();
+        
         //dd($timelines);
-        $timelines= Tweet::with('city')->orderBy('id','desc')->paginate(50); 
+        //$timelines = Tweet::with('city')->with('user')->orderBy('id','desc')->paginate(10);
         
         
-        
+        $timelines = Tweet::with('city')
+                            ->when($request->tweet_text, function ($query) use ($request) {
+                                return $query->where('text', 'like', "%$request->tweet_text%");
+                            })
+                            ->when($request->tweet_city, function ($query) use ($request) {
+                                return $query->where('city_id', 'like', "%$request->tweet_city%");
+                            })
+                            ->orderByRaw('created_at desc')
+                            ->paginate(10);
         
         
         
         //以下元データ
         //$follow_ids = $follower->followingIds($user->id);
-        //followed_idだけ抜き出す
+    
         //$following_ids = $follow_ids->pluck('followed_id')->toArray();
         //$timelines = $tweet->getTimelines($user->id, $following_ids);
         //ここまで
@@ -74,9 +86,12 @@ class TweetsController extends Controller
         //$cityprace = City::find($cityName->cities_id);
         //}
         
+                                
+                                
         return view('tweets.index', [
             'user' => $user,
             'timelines' => $timelines,
+            'allcities' => $allcities,
             //'cityNames' => $cityNames,
             //'cityprace' => $cityprace,
             //'city' => $city,

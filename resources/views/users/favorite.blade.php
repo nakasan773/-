@@ -34,7 +34,7 @@
                                     
                                     <a href="{{ url('users/' .$user->id .'/edit') }}" class="btn btn-primary">プロフィールを編集する</a>
                                     
-                                    <a href="{{ url('users/' .$user->id .'/favorite') }}" class="btn btn-primary">お気に入り一覧</a>
+                                    <button type="button" onclick="history.back()" class="btn btn-primary">戻る</button>
                                     
                                     <a href="{{ route('delete_confirm', ['id' => $user->id]) }}" class="btn btn-danger">退会する</a>
                                 @else
@@ -81,7 +81,6 @@
         </div>
     </div>
     <div class="movies row mt-5 text-center">        
-            
             @if (isset($timelines))
                 @foreach ($timelines as $timeline)
                 

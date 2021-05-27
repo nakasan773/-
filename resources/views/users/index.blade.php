@@ -20,6 +20,7 @@
                 <a href="{{ url('tweets') }}">みんなの投稿へ <i class="fas fa-users" class="fa-fw"></i> </a>
             </div>
             <div class="col-md-8">
+                
                 @foreach ($all_users as $user)
                     <div class="card">
                         <div class="card-haeder p-3 w-100 d-flex">

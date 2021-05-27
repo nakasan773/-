@@ -50,6 +50,8 @@ Route::group(['middleware' => 'auth'], function() {
     // ツイート関連
     Route::resource('tweets', 'TweetsController', ['only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']]);
 
+    Route::get('search', 'SearchController@index')->name('search.tweets');
+
     // コメント関連
     Route::resource('comments', 'CommentsController', ['only' => ['store']]);
     
