@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ValiRequests;
+use App\Http\Requests\TweetRequest;
+//use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Tweet;
 use App\Models\Comment;
@@ -150,7 +152,7 @@ class TweetsController extends Controller
         $tweet->save();
         
         
-        return redirect('tweets');
+        return redirect('/tweets');
     }
 
     /**
@@ -203,14 +205,10 @@ class TweetsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tweet $tweet)
+    public function update(TweetRequest $request, Tweet $tweet)
     {
         $data = $request->all();
-        $validator = Validator::make($data, [
-            'text' => ['required', 'string', 'max:140']
-        ]);
-
-        $validator->validate();
+        
         $tweet->tweetUpdate($tweet->id, $data);
 
         return redirect('tweets');

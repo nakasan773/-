@@ -64,6 +64,7 @@ class UsersController extends Controller
         $tweet_count = $tweet->getTweetCount($user->id);
         $follow_count = $follower->getFollowCount($user->id);
         $follower_count = $follower->getFollowerCount($user->id);
+        $favorite_count = Favorite::where('user_id', $user->id)->pluck('tweet_id')->count();
 
         return view('users.show', [
             'user'           => $user,
@@ -72,7 +73,8 @@ class UsersController extends Controller
             'timelines'      => $timelines,
             'tweet_count'    => $tweet_count,
             'follow_count'   => $follow_count,
-            'follower_count' => $follower_count
+            'follower_count' => $follower_count,
+            'favorite_count' => $favorite_count,
         ]);
     }
     
@@ -113,7 +115,7 @@ class UsersController extends Controller
         return redirect('users/'.$user->id);
     }
     
-    public function favorite(User $user, Tweet $tweet, Follower $follower, Favorite $favorite, $id)
+    public function favorite(Tweet $tweet, Follower $follower, $id)
     {
         $user = User::find($id);
 
@@ -124,6 +126,7 @@ class UsersController extends Controller
         $tweet_count = $tweet->getTweetCount($user->id);
         $follow_count = $follower->getFollowCount($user->id);
         $follower_count = $follower->getFollowerCount($user->id);
+        $favorite_count = Favorite::where('user_id', $user->id)->pluck('tweet_id')->count();
         //$timelines = $tweet->getUserTimeLine($user->id);
         //$test = $tweet->isFavorite($user->id);
         
@@ -139,14 +142,17 @@ class UsersController extends Controller
 
         //$test = Tweet::all();
         //$allfavorite = Favorite::all();
-        $pick_tweet = Favorite::pluck('tweet_id')->toArray();
+        
         //  dd($pick_favorite);
         //$alltweet = Tweet::all();
         //dd($allfavorite);
         //where('id', $allfavorite->tweet_id)
         //dd($test);
         //if ($user->id == ) {
-            $timelines = Tweet::with('city')->whereIn('id', $pick_tweet)->orderBy('id','desc')->paginate(50);
+        $pick_user = Favorite::where('user_id', $user->id)->pluck('tweet_id')->toArray();
+        
+        
+        $timelines = Tweet::with('city')->whereIn('id', $pick_user)->orderBy('id','desc')->paginate(50);
         //}
         
         //dd($timelines);
@@ -160,7 +166,7 @@ class UsersController extends Controller
             'tweet_count'    => $tweet_count,
             'follow_count'   => $follow_count,
             'follower_count' => $follower_count,
-            'fvoritenumber'  => $favoritenumber,
+            'favorite_count' => $favorite_count,
         ]);
     }
 

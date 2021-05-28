@@ -96,7 +96,7 @@
                                     
                                     <form action="{{ route('tweets.index')}}" method="GET">
                                         <input type="hidden" name="tweet_city" value="{{ $timeline->city->id }}" class="form-control">
-                                        <button type="submit" class="btn p-0 border-0"><i class="fas fa-map-marker-alt"></i>
+                                        <button type="submit" class="btn p-0 border-0"><i class="fas fa-hashtag"></i>
                                         {{ $timeline->city->city }}</button>
                                     </form>
                                 </div>
@@ -141,14 +141,14 @@
                                             @csrf
     
                                             <input type="hidden" name="tweet_id" value="{{ $timeline->id }}">
-                                            <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                            <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-bookmark fa-fw"></i></button>
                                         </form>
                                     @else
                                         <form method="POST" action="{{ url('favorites/' .array_column($timeline->favorites->toArray(), 'id', 'user_id')[$user->id]) }}" class="mb-0">
                                             @csrf
                                             @method('DELETE')
     
-                                            <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
+                                            <button type="submit" class="btn p-0 border-0 text-yellow"><i class="fas fa-bookmark fa-fw"></i></button>
                                         </form>
                                     @endif
                                     <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>

@@ -50,6 +50,11 @@ class Tweet extends Model
         return $this->hasMany(Comment::class);
     }
     
+        public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+    
     //ページネーション（カウント）ユーザー数
     public function getUserTimeLine(Int $user_id)
     {
@@ -106,7 +111,7 @@ class Tweet extends Model
     public function tweetUpdate(Int $tweet_id, Array $data)
     {
         $this->id = $tweet_id;
-        $this->text = $data['text'];
+        $this->text = $data['text_edit'];
         $this->update();
 
         return;

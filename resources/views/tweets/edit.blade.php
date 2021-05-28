@@ -26,13 +26,15 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <textarea class="form-control @error('text') is-invalid @enderror" name="text" required autocomplete="text" rows="4">{{ old('text') ? : $tweets->text }}</textarea>
+                                    <textarea class="form-control" name="text_edit" rows="4">{{ old('text') ? : $tweets->text }}</textarea>
     
-                                    @error('text')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    @if ($errors->has('text_edit'))
+                                        <div class="row justify-content-left">
+                                            <div class="cal-xs-4">
+                                                <span style="color:red">{{ $errors->first('text_edit') }}</span>
+                                            </div>
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
     

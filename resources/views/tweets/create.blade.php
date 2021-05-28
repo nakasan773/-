@@ -53,7 +53,7 @@
                             </div>
                             
                             <div class="col-ms-2 mt-3">
-                                <input id="image" type="file" name="image" autocomplete="image" rows="4">
+                                <input id="image" type="file" name="image" autocomplete="image" rows="4" value="画像を選択">
 
                                 @if ($errors->has('image'))
                                     <div class="row justify-content-left">

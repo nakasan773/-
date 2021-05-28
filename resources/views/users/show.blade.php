@@ -73,6 +73,10 @@
                                 <p class="font-weight-bold">フォロワー数</p>
                                 <span>{{ $follower_count }}</span>
                             </div>
+                            <div class="p-2 d-flex flex-column align-items-center">
+                                <p class="font-weight-bold">お気に入り数</p>
+                                <span>{{ $favorite_count }}</span>
+                            </div>
                         </div>
                     </div>
                     
@@ -111,6 +115,14 @@
                                 <img src="{{ url('storage/images/' .$timeline->image) }}" class="alignnone size-large wp-image-976" alt="" width="300" height="180">
                                 <div class="text-left">
                                     <a>{{ $timeline->text }}</a>
+                                    
+                                    <br>
+                                    
+                                    <form action="{{ route('tweets.index')}}" method="GET">
+                                        <input type="hidden" name="tweet_city" value="{{ $timeline->city->id }}" class="form-control">
+                                        <button type="submit" class="btn p-0 border-0"><i class="fas fa-hashtag"></i>
+                                        {{ $timeline->city->city }}</button>
+                                    </form>
                                 </div>
                             </div>
                             
@@ -144,7 +156,7 @@
                                                 @csrf
         
                                                 <input type="hidden" name="tweet_id" value="{{ $timeline->id }}">
-                                                <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                                <button type="submit" class="btn p-0 border-0 text-primary"><i class="cfa-fw"></i></button>
                                             </form>
                                         @else
                                             <form method="POST" action="{{ url('favorites/' .array_column($timeline->favorites->toArray(), 'id', 'user_id')[Auth::user()->id]) }}" class="mb-0">
@@ -162,6 +174,15 @@
                     </div>
                 @endforeach
             @endif
+        </div>    
+            
+        @if ($timelines->count() == 0)
+            <div class="mt-5">
+                <div class="text-center">
+                    <p class="h2">あなたの投稿がありません</p>
+                </div>
+            </div>
+        @endif
         
         <div class="my-4 d-flex justify-content-center">
             {{ $timelines->links('pagination::bootstrap-4') }}

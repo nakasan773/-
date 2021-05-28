@@ -19,6 +19,9 @@ Route::get('/', function () {
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup');
 Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 
+// ゲストログイン
+Route::get('guest', 'Auth\LoginController@guestLogin')->name('login.guest');
+
 // ログイン機能
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
@@ -50,12 +53,13 @@ Route::group(['middleware' => 'auth'], function() {
     // ツイート関連
     Route::resource('tweets', 'TweetsController', ['only' => ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']]);
 
-    Route::get('search', 'SearchController@index')->name('search.tweets');
-
     // コメント関連
     Route::resource('comments', 'CommentsController', ['only' => ['store']]);
     
     // いいね関連
     Route::resource('favorites', 'FavoritesController', ['only' => ['store', 'destroy']]);
+    
+    Route::get('/tweets/{tweet}/check', 'FavoritesController@check')->name('favorite.check');
+    Route::resource('tweets.favorites', 'FavoritesController', ['only' => ['store']]);
 });
 

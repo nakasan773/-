@@ -21,10 +21,6 @@ class User_SexesTableSeeder extends Seeder
                 'id' => 2,
                 'sex' => '女性',
             ],
-            [
-                'id' => 3,
-                'sex' => '不明',
-            ],
         ]);
     }
 }

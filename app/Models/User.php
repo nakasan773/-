@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->belongsTo(Sex::class);//'App\Sex'
     }
     
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+    
     // リレーション
     public function followers()
     {

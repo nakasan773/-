@@ -13,13 +13,6 @@ class Favorite extends Model
     {
         return (boolean) $this->where('user_id', $user_id)->where('tweet_id', $tweet_id)->first();
     }
-    
-    //いいね一覧表示
-    public function getFavorite(Int $tweet_id)
-    {
-        return $this->where('id', $tweet_id)->orderBy('id','desc')->paginate(50);
-    }
-
     public function storeFavorite(Int $user_id, Int $tweet_id)
     {
         $this->user_id = $user_id;

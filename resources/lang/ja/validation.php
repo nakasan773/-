@@ -156,7 +156,5 @@ return [
         'password'=>'パスワード',
         'password_confirmation'=>'パスワード確認',
         'single_comment'=>'ひとこと',
-        'image'=>'写真',
-        'cities_id'=>'地域名'
     ],
 ];

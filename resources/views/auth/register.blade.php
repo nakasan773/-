@@ -92,22 +92,6 @@
                 <br>
                 
                 <div class="mt-1 clearfix">
-                    <p class="d-inline ml-2">ひとこと（15字以内）</p>
-                    @if ($errors->has('single_comment'))
-                        <div class="row justify-content-center ml-5">
-                            <div class="cal-xs-4">
-                                <span style="color:red">{{ $errors->first('single_comment') }}</span>
-                            </div>
-                        </div>
-                    @endif
-                    <input type="text" name="single_comment" class="form-control-sm col-sm-8 ml-5 d-inline float-right">
-                </div>
-                
-                <br>
-                
-                <br>
-                
-                <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">メースアドレス</p>
                     @if ($errors->has('email'))
                         <div class="row justify-content-center ml-5">

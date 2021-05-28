@@ -111,6 +111,14 @@
                                 <img src="{{ url('storage/images/' .$timeline->image) }}" class="alignnone size-large wp-image-976" alt="" width="300" height="180">
                                 <div class="text-left">
                                     <a>{{ $timeline->text }}</a>
+                                    
+                                    <br>
+                                    
+                                    <form action="{{ route('tweets.index')}}" method="GET">
+                                        <input type="hidden" name="tweet_city" value="{{ $timeline->city->id }}" class="form-control">
+                                        <button type="submit" class="btn p-0 border-0"><i class="fas fa-hashtag"></i>
+                                        {{ $timeline->city->city }}</button>
+                                    </form>
                                 </div>
                             </div>
                             
@@ -162,6 +170,16 @@
                     </div>
                 @endforeach
             @endif
+            
+        </div>
+            
+        @if ($timelines->count() == 0)
+            <div class="mt-5">
+                <div class="text-center">
+                    <p class="h2">あなたのお気に入りがありません</p>
+                </div>
+            </div>
+        @endif
         
         <div class="my-4 d-flex justify-content-center">
             {{ $timelines->links('pagination::bootstrap-4') }}
