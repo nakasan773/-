@@ -1,5 +1,5 @@
 <header>
-    <h1><a href="/tweets" class="ml-4">みんなの地元シェアサイト</a></h1>
+    <h1><a href="/tweets" class="ml-4">みんなの地元シェアサイト（画像S3保存）</a></h1>
     
     @if (Auth::check())
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
