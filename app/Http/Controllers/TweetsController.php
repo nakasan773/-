@@ -146,7 +146,7 @@ class TweetsController extends Controller
             $file = $data['image'];
             //$filename = $request->file('image')->getClientOriginalName();
             //二つのpathに保存
-            $path = Storage::disk('s3')->putFileAs('/',$file, 'public');
+            $path = Storage::disk('s3')->put('/',$file, 'public');
             //$request->image->storeAs('public/images/', date("Ymd").'_'.$filename);
             $tweet->image = $path;
             //$tweet->image = date("Ymd").'_'.$filename;
