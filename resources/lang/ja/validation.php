@@ -150,7 +150,6 @@ return [
         'name'=>'ユーザー名',
         'comment'=>'コメント',
         'birthday'=>'生年月日',
-        'user_sexes_id'=>'性別',
         'city'=>'場所',
         'email'=>'メールアドレス',
         'password'=>'パスワード',

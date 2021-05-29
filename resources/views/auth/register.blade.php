@@ -69,29 +69,6 @@
                 <br>
                 
                 <div class="mt-1 clearfix">
-                    <p class="d-inline ml-2">性別</p>
-                    
-                    @if ($errors->has('user_sex_id'))
-                        <div class="row justify-content-center">
-                            <div class="cal-xs-4">
-                                <span style="color:red">{{ $errors->first('user_sex_id') }}</span>
-                            </div>
-                        </div>
-                    @endif
-                    <select class="form-control-sm col-sm-8 ml-5 d-inline float-right" id="changeSelect" name="user_sex_id" onchange="entryChange2();">
-                        <option value="">未選択</option>
-                        @foreach ($sexes as $sex)
-                            <option value="{{ $sex->id }}">{{ $sex->sex }}</option>
-                        @endforeach
-                    </select>
-                    
-                </div>
-                
-                <br>
-                
-                <br>
-                
-                <div class="mt-1 clearfix">
                     <p class="d-inline ml-2">メースアドレス</p>
                     @if ($errors->has('email'))
                         <div class="row justify-content-center ml-5">

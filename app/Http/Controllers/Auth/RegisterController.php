@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
-use App\Sex;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +53,6 @@ class RegisterController extends Controller
             'screen_name' => ['required', 'string', 'min:6', 'max:50'],
             'name' => ['required', 'string', 'min:1', 'max:15'],
             'age' => ['required', 'string', 'max:200'],
-            'user_sex_id' => ['required'],
             'email' => ['required', 'string', 'unique:users','email'],
             'password' => ['required', 'string', 'min:6', 'max:15', 'confirmed'],
         ]);
@@ -72,7 +70,6 @@ class RegisterController extends Controller
                 'screen_name' => $data['screen_name'],
                 'name' => $data['name'],
                 'age' => $data['age'],
-                'user_sex_id' => $data['user_sex_id'],
                 'email' => $data['email'],
                 'password' => Hash::make($data['password']),
         ]);

@@ -24,7 +24,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'user_sex_id',
         'age',
         'single_comment',
         'profile_image'
@@ -54,17 +53,6 @@ class User extends Authenticatable
     public function getAllUsers(Int $user_id)
     {
         return $this->Where('id', '<>', $user_id)->paginate(5);
-    }
-    
-    // Sexモデルを親に持つことを明記
-    public function sex()
-    {
-        return $this->belongsTo(Sex::class);//'App\Sex'
-    }
-    
-    public function likes()
-    {
-        return $this->hasMany(Like::class);
     }
     
     // リレーション
