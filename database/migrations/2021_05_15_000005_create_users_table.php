@@ -21,8 +21,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 64);
             $table->integer('age');//生年月日
-            $table->integer('user_sex_id')->unsigned()->nullable();//性別
-            $table->foreign('user_sex_id')->references('id')->on('user_sexes')->onDelete('cascade');
             $table->string('profile_image')->nullable()->default('noimage.png')->comment('プロフィール画像');
             $table->char('delete_flag', 1)->default(0); //
             $table->rememberToken();
