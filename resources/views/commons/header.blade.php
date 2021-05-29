@@ -1,5 +1,5 @@
 <header>
-    <h1><a href="/tweets" class="ml-4">みんなの地元シェアサイト（画像S3保存）</a></h1>
+    <h1><a href="/tweets" class="ml-4">みんなの地元シェアサイト</a></h1>
     
     @if (Auth::check())
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -13,7 +13,9 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto align-items-center">
                     <li class="nav-item">
-                        <img src="{{ asset('storage/profile_image/' .auth()->user()->profile_image) }}" class="rounded-circle" width="50" height="50">
+                        
+                        <!--<img src="{{ asset('storage/profile_image/' .auth()->user()->profile_image) }}" class="rounded-circle" width="50" height="50">-->
+                        <img src="{{ Storage::disk('s3')->url(auth()->user()->profile_image) }}" class="rounded-circle" width="50" height="50">
                     </li>
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

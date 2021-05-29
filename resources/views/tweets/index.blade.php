@@ -68,7 +68,7 @@
                             <!--カードヘッダーここから-->
                             <div class="card-header p-3 w-100 d-flex">
                                 
-                                <img src="{{ asset('storage/profile_image/' .$timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                                <img src="{{ Storage::disk('s3')->url($timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
                                 
                                 <div class="ml-2 d-flex flex-column">
                                     <p class="mb-0">{{ $timeline->user->name }}</p>
@@ -86,7 +86,10 @@
                             <div class="card-body">
                                 
                                 <div class="text-center">
-                                    <img src="{{ asset('storage/images/' .$timeline->image) }}">
+                                    
+                                    <!--<img src="{{ asset('storage/images/' .$timeline->image) }}">-->
+                                    <img src="{{ Storage::disk('s3')->url($timeline->image) }}">
+                                    
                                 </div>
                                 <div class="justify-content-flex-start">
                                     

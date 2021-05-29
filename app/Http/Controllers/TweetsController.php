@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ValiRequests;
 use App\Http\Requests\TweetRequest;
+use Illuminate\Support\Facades\Storage;
 //use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\Tweet;
@@ -142,7 +143,9 @@ class TweetsController extends Controller
         //投稿した画像をDBに格納させる
         if($request->file('image')->isValid()) {
             $filename = $request->file('image')->getClientOriginalName();
-            $request->image->storeAs('public/images/', date("Ymd").'_'.$filename);
+            //二つのpathに保存
+            $path = Storage::disk('s3')->put('/images',$filename, 'public');
+            //$request->image->storeAs('public/images/', date("Ymd").'_'.$filename);
             $tweet->image = date("Ymd").'_'.$filename;
         }
         

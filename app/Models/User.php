@@ -106,14 +106,17 @@ class User extends Authenticatable
     public function updateProfile(Array $params)
     {
         if (isset($params['profile_image'])) {
-            $file_name = $params['profile_image']->store('public/profile_image/');
+            //$file_name = $params['profile_image']->store('public/profile_image/');
+            $file_name = $params['profile_image'];
+            $path = Storage::disk('s3')->put('/profile_image',$file_name, 'public');
+            
 
             $this::where('id', $this->id)
                 ->update([
                     'screen_name'    => $params['screen_name'],
                     'name'           => $params['name'],
                     'single_comment' => $params['single_comment'],
-                    'profile_image'  => basename($file_name),
+                    'profile_image'  => basename($path),
                     'email'          => $params['email'],
                 ]);
         } else {

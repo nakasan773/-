@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container mt-5 pt-5 text-center">
-        <span class="display-4 font-weight-bold">田舎の掲示板</span>
+        <span class="display-4 font-weight-bold">田舎の掲示板（画像S3保存）</span>
     </div>
     
     <div class="row justify-content-center mt-5">
