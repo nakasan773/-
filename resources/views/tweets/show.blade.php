@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-body">
                         {!! nl2br(e($tweet->text)) !!} {{ $cityname->city }}
-                        <img src="{{ Storage::disk('s3')->url($tweet->image) }}">
+                        <img src="{{ Storage::disk('s3')->url($tweet->image) }}" >
                     </div>
                     <div class="card-footer py-1 d-flex justify-content-end bg-white">
                         @if ($tweet->user->id === Auth::user()->id)

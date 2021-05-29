@@ -78,7 +78,7 @@
                                 
                                 <div class="text-center">
                                 
-                                    <img src="https://portfolio5128.s3-ap-northeast-1.amazonaws.com/sample.jpg" width="600" height="380">
+                                    <img src="{{ Storage::disk('s3')->url($timeline->image) }}" width="600" height="380">
                                 
                                 </div>
                                 <div class="justify-content-flex-start">
