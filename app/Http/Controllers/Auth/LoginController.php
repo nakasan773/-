@@ -49,6 +49,6 @@ class LoginController extends Controller
             return redirect('/tweets');
         }
 
-        return redirect('/tweets');
+        return redirect('/');
     }
 }

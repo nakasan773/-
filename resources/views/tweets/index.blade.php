@@ -59,7 +59,7 @@
                             <!--カードヘッダーここから-->
                             <div class="card-header p-3 w-100 d-flex">
                                 
-                                <img src="https://portfolio5128.s3-ap-northeast-1.amazonaws.com/noimage.png" class="rounded-circle" width="50" height="50">
+                                <img src="{{ Storage::disk('s3')->url($timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
                                 
                                 <div class="ml-2 d-flex flex-column">
                                     <p class="mb-0">{{ $timeline->user->name }}</p>
