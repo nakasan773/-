@@ -21,7 +21,6 @@ class UsersTableSeeder extends Seeder
                 'profile_image'  => 'noimage.png',
                 'age' => '2' .$i,
                 'single_comment' => 'ひとこと' .$i,
-                'user_sex_id' => 1,
                 'remember_token' => str_random(10),
                 'created_at'  => now(),
                 'updated_at' => now()
