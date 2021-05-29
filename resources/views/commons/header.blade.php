@@ -15,7 +15,7 @@
                     <li class="nav-item">
                         
                         
-                        <img src="{{ Storage::disk('s3')->url(auth()->user()->profile_image) }}" class="rounded-circle" width="50" height="50">
+                        <img src="https://portfolio5128.s3-ap-northeast-1.amazonaws.com/noimage.png" class="rounded-circle" width="50" height="50">
                     
                     </li>
                     <li class="nav-item dropdown">
