@@ -143,7 +143,7 @@
                   <button type="submit" class="btn btn-primary w-50">登録</button>
     
                   <p class="mt-5">
-                    <a href="#" class="text-primary d-inline">ログインはこちらから</a>
+                    <a href="login" class="text-primary d-inline">ログインはこちらから</a>
                   </p>
                 </div>
            

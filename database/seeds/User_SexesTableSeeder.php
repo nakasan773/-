@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\Sex;
+use App\Sex;
 
 class User_SexesTableSeeder extends Seeder
 {
