@@ -21,7 +21,7 @@
                 <div class="d-inline-flex">
                     
                     <div class="p-3 d-flex flex-column">
-                        <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="100" height="100">
+                        <img src="{{ Storage::disk('s3')->url($user->profile_image) }}" class="rounded-circle ml-5" width="100" height="100">
                         <div class="mt-3 d-flex flex-column">
                             <h4 class="mb-0 font-weight-bold">{{ $user->name }}</h4>
                             <span class="text-secondary">{{ $user->screen_name }}</span>
@@ -100,7 +100,7 @@
                     <div class="col-md-4 mb-3">
                         <div class="card">
                             <div class="card-haeder p-3 w-100 d-flex">
-                                <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                                <img src="{{ Storage::disk('s3')->url($timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
                                 <div class="ml-2 d-flex flex-column flex-grow-1">
                                     <p class="mb-0">{{ $timeline->user->user_name }}</p>
                                     <a href="{{ url('users/' .$timeline->user->id) }}" class="text-secondary">{{ $timeline->user->screen_name }}</a>
@@ -112,7 +112,7 @@
                             
                             
                             <div class="card-body">
-                                <img src="{{ url('storage/images/' .$timeline->image) }}" class="alignnone size-large wp-image-976" alt="" width="300" height="180">
+                                <img src="{{ Storage::disk('s3')->url($timeline->image) }}" class="alignnone size-large wp-image-976" alt="" width="300" height="180">
                                 <div class="text-left">
                                     <a>{{ $timeline->text }}</a>
                                     
@@ -156,14 +156,14 @@
                                                 @csrf
         
                                                 <input type="hidden" name="tweet_id" value="{{ $timeline->id }}">
-                                                <button type="submit" class="btn p-0 border-0 text-primary"><i class="cfa-fw"></i></button>
+                                                <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-bookmark fa-fw"></i></button>
                                             </form>
                                         @else
                                             <form method="POST" action="{{ url('favorites/' .array_column($timeline->favorites->toArray(), 'id', 'user_id')[Auth::user()->id]) }}" class="mb-0">
                                                 @csrf
                                                 @method('DELETE')
         
-                                                <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
+                                                <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-bookmark fa-fw"></i></button>
                                             </form>
                                         @endif
                                         <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>

@@ -9,7 +9,7 @@
     <br>
     
     <div class="text-center">
-        <h2>ユーザー一覧画面</h2>
+        <h2><b>ユーザー一覧画面</b></h2>
     </div>
     
     <br>

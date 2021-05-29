@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -108,7 +109,7 @@ class User extends Authenticatable
         if (isset($params['profile_image'])) {
             //$file_name = $params['profile_image']->store('public/profile_image/');
             $file_name = $params['profile_image'];
-            $path = Storage::disk('s3')->put('/profile_image',$file_name, 'public');
+            $path = Storage::disk('s3')->put('/',$file_name, 'public');
             
 
             $this::where('id', $this->id)

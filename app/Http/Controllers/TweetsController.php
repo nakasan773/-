@@ -142,11 +142,14 @@ class TweetsController extends Controller
         
         //投稿した画像をDBに格納させる
         if($request->file('image')->isValid()) {
-            $filename = $request->file('image')->getClientOriginalName();
+            
+            $file = $data['image'];
+            //$filename = $request->file('image')->getClientOriginalName();
             //二つのpathに保存
-            $path = Storage::disk('s3')->put('/images',$filename, 'public');
+            $path = Storage::disk('s3')->put('/',$file, 'public');
             //$request->image->storeAs('public/images/', date("Ymd").'_'.$filename);
-            $tweet->image = date("Ymd").'_'.$filename;
+            $tweet->image = $path;
+            //$tweet->image = date("Ymd").'_'.$filename;
         }
         
         //$imagename = $filename->getClientOriginalName()->store('public/images');    //storageフォルダに投稿した画像を保存しファイルパスを格納

@@ -9,10 +9,11 @@
     <br>
     
     <div class="text-center">
-        <h2><b>投稿検索画面</b></h2>
+        <h2><b>みんなの投稿</b></h2>
+    </div>
+            
+    <br>
     
-        <br>
-        
         <br>
         
         <form action="{{ route('tweets.index') }}" method="GET">
@@ -42,16 +43,6 @@
     
     <br>
     
-    <br>
-    
-    <div class="text-center">
-    <h2><b>みんなの投稿</b></h2>
-    </div>
-            
-    <br>
-    
-    <br>
-    
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mb-3 text-right">
@@ -68,7 +59,7 @@
                             <!--カードヘッダーここから-->
                             <div class="card-header p-3 w-100 d-flex">
                                 
-                                <img src="public_profile_image/noimage.png" class="rounded-circle" width="50" height="50">
+                                <img src="{{ Storage::disk('s3')->url($timeline->user->profile_image) }}" class="rounded-circle" width="50" height="50">
                                 
                                 <div class="ml-2 d-flex flex-column">
                                     <p class="mb-0">{{ $timeline->user->name }}</p>
@@ -86,9 +77,9 @@
                             <div class="card-body">
                                 
                                 <div class="text-center">
-                                    
-                                    <img src="public_image/sample.jpg">
-                                    
+                                
+                                    <img src="{{ Storage::disk('s3')->url($timeline->image) }}">
+                                
                                 </div>
                                 <div class="justify-content-flex-start">
                                     
@@ -150,7 +141,7 @@
                                             @csrf
                                             @method('DELETE')
     
-                                            <button type="submit" class="btn p-0 border-0 text-yellow"><i class="fas fa-bookmark fa-fw"></i></button>
+                                            <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-bookmark fa-fw"></i></button>
                                         </form>
                                     @endif
                                     <p class="mb-0 text-secondary">{{ count($timeline->favorites) }}</p>

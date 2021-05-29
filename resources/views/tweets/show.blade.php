@@ -11,7 +11,7 @@
             <div class="col-md-8 mb-3">
                 <div class="card">
                     <div class="card-haeder p-3 w-100 d-flex">
-                        <img src="{{ asset('storage/profile_image/' .$tweet->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                        <img src="{{ Storage::disk('s3')->url($user->profile_image) }} }}" class="rounded-circle" width="50" height="50">
                         <div class="ml-2 d-flex flex-column">
                             <p class="mb-0">{{ $tweet->user->name }}</p>
                             <a href="{{ url('users/' .$tweet->user->id) }}" class="text-secondary">{{ $tweet->user->screen_name }}</a>
@@ -22,7 +22,7 @@
                     </div>
                     <div class="card-body">
                         {!! nl2br(e($tweet->text)) !!} {{ $cityname->city }}
-                        <img src="{{ url('storage/images/' .$tweet->image) }}">
+                        <img src="{{ Storage::disk('s3')->url($tweet->image) }}">
                     </div>
                     <div class="card-footer py-1 d-flex justify-content-end bg-white">
                         @if ($tweet->user->id === Auth::user()->id)
@@ -54,14 +54,14 @@
                                     @csrf
     
                                     <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
-                                    <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                    <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-bookmark fa-fw"></i></button>
                                 </form>
                             @else
                                 <form method="POST" action="{{ url('favorites/' .array_column($tweet->favorites->toArray(), 'id', 'user_id')[$user->id]) }}" class="mb-0">
                                     @csrf
                                     @method('DELETE')
     
-                                    <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
+                                    <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-bookmark fa-fw"></i></button>
                                 </form>
                             @endif
                             <p class="mb-0 text-secondary">{{ count($tweet->favorites) }}</p>
@@ -79,7 +79,7 @@
                     @forelse ($comments as $comment)
                         <li class="list-group-item">
                             <div class="py-3 w-100 d-flex">
-                                <img src="{{ asset('storage/profile_image/' .$comment->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                                <img src="{{ Storage::disk('s3')->url($user->profile_image) }}" class="rounded-circle" width="50" height="50">
                                 <div class="ml-2 d-flex flex-column">
                                     <p class="mb-0">{{ $comment->user->name }}</p>
                                     <a href="{{ url('users/' .$comment->user->id) }}" class="text-secondary">{{ $comment->user->screen_name }}</a>
@@ -104,7 +104,7 @@
     
                                 <div class="form-group row mb-0">
                                     <div class="col-md-12 p-3 w-100 d-flex">
-                                        <img src="{{ asset('storage/profile_image/' .$user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                                        <img src="{{ Storage::disk('s3')->url($user->profile_image) }}" class="rounded-circle" width="50" height="50">
                                         <div class="ml-2 d-flex flex-column">
                                             <p class="mb-0">{{ $user->name }}</p>
                                             <a href="{{ url('users/' .$user->id) }}" class="text-secondary">{{ $user->screen_name }}</a>

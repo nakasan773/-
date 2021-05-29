@@ -28,7 +28,7 @@
     
                                 <div class="col-md-6 d-flex align-items-center">
                                     
-                                    <img src="{{ url('storage/profile_image/' .$user->profile_image) }}" class="mr-2 rounded-circle" width="80" height="80" alt="">
+                                    <img src="{{ Storage::disk('s3')->url($user->profile_image) }}" class="mr-2 rounded-circle" width="80" height="80" alt="">
                                     <input type="file" name="profile_image" class="@error('profile_image') is-invalid @enderror" autocomplete="profile_image" readonly>
                                     
                                     @error('profile_image')
