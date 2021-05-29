@@ -47,10 +47,12 @@
                     ログイン
                 </button>
             </div>
-
-            <div class="text-center mt-3">
-                <button type="submit" class="btn btn-link">まだ登録がお済みでない方はこちら</button>
-            </div>
         </form>
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-link" onclick=location.href='signup'>まだ登録がお済みでない方はこちら</button>
+        </div>
+        <div class="text-center mt-3">
+            <button type="submit" class="btn btn-link" onclick=location.href='/guest'>ゲストログイン方はこちら</button>
+        </div>
     </main>
 @endsection
