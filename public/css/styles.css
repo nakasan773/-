@@ -82,3 +82,20 @@ header nav {
   text-align: center;
   background-color: #CCCCCC;
 }
+
+.card {
+  width: 740px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #ccc;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-img {
+  border-radius: 5px 5px 0 0;
+  max-width: 100%;
+  height: 400px;
+}

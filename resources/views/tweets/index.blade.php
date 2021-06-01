@@ -78,7 +78,7 @@
                                 
                                 <div class="text-center">
                                 
-                                    <img src="{{ Storage::disk('s3')->url($timeline->image) }}" width="690" height="380" class="rounded">
+                                    <img class="card-img rounded" src="{{ Storage::disk('s3')->url($timeline->image) }}">
                                 
                                 </div>
                                 <div class="justify-content-flex-start">
