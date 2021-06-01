@@ -81,7 +81,7 @@
                             </div>
                             <!--カードヘッダーここまで-->
                             
-                            <img class="card-img rounded" src="{{ Storage::disk('s3')->url($timeline->image) }}">
+                            <img class="card-img" src="{{ Storage::disk('s3')->url($timeline->image) }}">
                             
                             <!--カードボディここから-->
                             <div class="card-body">

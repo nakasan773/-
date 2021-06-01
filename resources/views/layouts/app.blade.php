@@ -39,7 +39,6 @@
             </div>
         
         @livewireScripts
-        @include('commons.footer')
         </div>
 
     </body>

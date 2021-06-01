@@ -1,51 +1,26 @@
 <header>
-    <h1><a href="/tweets" class="ml-4">みんなの地元シェアサイト</a></h1>
-    
-    @if (Auth::check())
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <li class="nav-item mr-5">
-                    <a href="{{ url('tweets/create') }}" class="btn btn-md btn-primary">ツイートする</a>
-                </li>
-                <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-                </ul>
-                <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto align-items-center">
-                    <li class="nav-item">
-                        
-                        
-                        <img src="{{ Storage::disk('s3')->url(auth()->user()->profile_image) }}" class="rounded-circle" width="50" height="50">
-                    
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ auth()->user()->name }} <span class="caret"></span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a href="{{ url('users/' .auth()->user()->id) }}" class="dropdown-item">マイページ</a>
-                            <a href="{{ route('logout') }}" class="dropdown-item"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                {{ __('ログアウト') }}
-                            </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    @else
-        <nav>
+    <h2><a href="/">個人開発 掲示板</a></h2>
+    <nav class="pc-nav">
+        @if (Auth::check())
             <ul>
-                <li><a href="/signup">新規登録</a></li>
-                <li><a href="/login">ログイン</a></li>
+                <p class="mt-1 mr-5">
+                    
+                    <img src="{{ Storage::disk('s3')->url(auth()->user()->profile_image) }}" class="rounded-circle" width="30" height="25">
+                    
+                    {{ Auth::user()->name }}
+                
+                </p>
+                <a href="{{ url('tweets/create') }}" class="btn btn-md btn-primary mr-2">ツイートする</a>
+                <li><a href="{{ url('users/' .auth()->user()->id .'/favorite') }}">お気に入り</a></li>
+                <li><a href="{{ url('users/' .auth()->user()->id) }}">マイページ</a></li>
+                <li><a href="/logout">ログアウト</a></li>
             </ul>
-        </nav>
-    @endif
-    
+        @else
+            <ul>
+                <li><a href="/login">ログイン</a></li>
+                <li><a href="/signup">新規登録</a></li>
+                <li><a href="/guest">ゲストログイン</a></li>
+            </ul>
+        @endif
+    </nav>
 </header>

@@ -21,22 +21,25 @@ a {
 
 header {
       width: 100%;
+      padding: 10px 10px;
       z-index: 10;
       background-color: #87cefa;
-      display: flex;
-      align-items: center;
       position: fixed;
       top: 0;
-      padding: 20px 10px;
-      z-index: 10;
       display: flex;
+      align-items: center;
+      z-index: 10;
 }
 
-header h1 {
-      padding: 0;
-      font-size: 30px;
-      font-weight: bold;
-      color: #fafafa;
+header nav {
+      margin: 0 0 0 auto;
+}
+
+header p {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin-right: 10px;
 }
 
 header ul {
@@ -49,12 +52,14 @@ header li {
       margin: 0 0 0 15px;
       font-size: 14px;
       font-weight: bold;
-      padding-top: 0px;
-      color: #fafafa;
+      padding-top: 20px;
 }
 
-header nav {
-      margin: 0 0 0 auto;
+header h2 {
+      padding: 0;
+      font-size: 30px;
+      font-weight: bold;
+      color: #fafafa;
 }
 
 .user-info{
