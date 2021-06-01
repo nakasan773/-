@@ -11,24 +11,34 @@
     <div class="text-center">
         <h2><b>みんなの投稿</b></h2>
     </div>
-            
+    
     <br>
     
         <br>
         
         <form action="{{ route('tweets.index') }}" method="GET">
+            
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">キーワード</label>
-                <div class="col-sm-5">
-                    <input type="text" name="tweet_text" value="{{ request('tweet_text') }}" class="form-control">
+                <div class="col-sm-2 col-xs-2">
                 </div>
-                <div class="col-sm-auto">
-                    <button type="search" class="btn btn-primary ">検索</button>
+                <div class="col-sm-2 col-xs-2">
+                    <label class="col-form-label">キーワード</label>
+                </div>
+                <div class="col-sm-4 col-xs-4">
+                    <input type="text" name="tweet_text" value="{{ request('tweet_text') }}" class="form-control mr-5">
+                </div>
+                <div class="col-sm-4 col-xs-4">
+                    <button type="search" class="btn btn-primary">検索</button>
                 </div>
             </div>
+            
             <div class="form-group row">
-                <label class="col-sm-2">地域カテゴリ</label>
-                <div class="col-sm-3">
+                <div class="col-sm-2 col-xs-2">
+                </div>
+                <div class="col-sm-2 col-xs-2">
+                    <label class="col-form-label">地域カテゴリ</label>
+                </div>
+                <div class="col-sm-2 col-xs-2">
                     <select name="tweet_city" value="{{ request('tweet_city') }}" class="form-control">
                         <option value="">未選択</option>
                         @foreach ($allcities as $city)
@@ -71,16 +81,12 @@
                             </div>
                             <!--カードヘッダーここまで-->
                             
-                            
+                            <img class="card-img rounded" src="{{ Storage::disk('s3')->url($timeline->image) }}">
                             
                             <!--カードボディここから-->
                             <div class="card-body">
                                 
-                                <div class="text-center">
-                                
-                                    <img class="card-img rounded" src="{{ Storage::disk('s3')->url($timeline->image) }}">
-                                
-                                </div>
+                                <h4 class="mb-2">ER図を書いてみた</h4>
                                 <div class="justify-content-flex-start">
                                     
                                     {!! nl2br(e($timeline->text)) !!}
