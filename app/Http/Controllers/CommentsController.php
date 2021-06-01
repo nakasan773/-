@@ -38,6 +38,7 @@ class CommentsController extends Controller
     {
         $user = auth()->user();
         $data = $request->all();
+        
         $validator = Validator::make($data, [
             'tweet_id' =>['required', 'integer'],
             'text'=> ['required', 'string', 'max:140']

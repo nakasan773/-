@@ -78,8 +78,6 @@ class UsersController extends Controller
             'favorite_count' => $favorite_count,
         ]);
     }
-    
-
 
     /**
      * Show the form for editing the specified resource.
@@ -119,45 +117,16 @@ class UsersController extends Controller
     public function favorite(Tweet $tweet, Follower $follower, $id)
     {
         $user = User::find($id);
+        $favorite_count = Favorite::where('user_id', $user->id)->pluck('tweet_id')->count();
+        $pick_user = Favorite::where('user_id', $user->id)->pluck('tweet_id')->toArray();
+        $timelines = Tweet::with('city')->whereIn('id', $pick_user)->orderBy('id','desc')->paginate(50);
 
         $login_user = auth()->user();
-
         $is_following = $login_user->isFollowing($user->id);
         $is_followed = $login_user->isFollowed($user->id);
         $tweet_count = $tweet->getTweetCount($user->id);
         $follow_count = $follower->getFollowCount($user->id);
         $follower_count = $follower->getFollowerCount($user->id);
-        $favorite_count = Favorite::where('user_id', $user->id)->pluck('tweet_id')->count();
-        //$timelines = $tweet->getUserTimeLine($user->id);
-        //$test = $tweet->isFavorite($user->id);
-        
-        //$timelines = $tweet->getFavorite($user->id);
-        //dd($timelines);
-        //   $pick_user = User::get($id)->pluck('id')->toArray();
-        //$pick_user = $user->pluck('id')->toArray();
-        //   dd($pick_user);
-        
-        //$pick_user = User::pluck('id')->toArray();
-        //$favoritenumber = Favorite::whereIn('id', $pick_user);
-        //dd($favoritenumber->query()->id);
-
-        //$test = Tweet::all();
-        //$allfavorite = Favorite::all();
-        
-        //  dd($pick_favorite);
-        //$alltweet = Tweet::all();
-        //dd($allfavorite);
-        //where('id', $allfavorite->tweet_id)
-        //dd($test);
-        //if ($user->id == ) {
-        $pick_user = Favorite::where('user_id', $user->id)->pluck('tweet_id')->toArray();
-        
-        
-        $timelines = Tweet::with('city')->whereIn('id', $pick_user)->orderBy('id','desc')->paginate(50);
-        //}
-        
-        //dd($timelines);
-        
 
         return view('users.favorite', [
             'user'           => $user,
@@ -182,39 +151,40 @@ class UsersController extends Controller
     public function delete_confirm($id)
     {
         $user = User::find($id);
+
         return view('users.delete_confirm', [
-            'user' => $user]);
+            'user' => $user
+        ]);
     }
     
     public function destroy($id)
     {
         $user = User::find($id);
         $user->delete();
+
         return redirect('/');
     }
 
-    // フォロー
     public function follow(User $user)
     {
         $follower = auth()->user();
-        // フォローしているか
         $is_following = $follower->isFollowing($user->id);
+
         if(!$is_following) {
-            // フォローしていなければフォローする
             $follower->follow($user->id);
+
             return back();
         }
     }
-    
-    // フォロー解除
+
     public function unfollow(User $user)
     {
         $follower = auth()->user();
-        // フォローしているか
         $is_following = $follower->isFollowing($user->id);
+
         if($is_following) {
-            // フォローしていればフォローを解除する
             $follower->unfollow($user->id);
+
             return back();
         }
     }

@@ -25,14 +25,20 @@ class TweetRequest extends FormRequest
     public function rules()
     {
         return [
-            'text_edit'   => 'required',
+            'text_title_edit' => 'required|min:2|max:12',
+            'text_edit'       => 'required|min:2|max:140',
         ];
     }
-    
+
     public function messages()
     {
         return [
-            'text_edit.required'   => '編集内容を入力して下さい。',
+            'text_title_edit.required' => '編集内容を入力して下さい。',
+            'text_title_edit.min'      => '2文字以上で入力して下さい。',
+            'text_title_edit.max'      => '12文字以下で入力して下さい。',
+            'text_edit.required'       => '編集内容を入力して下さい。',
+            'text_edit.min'            => '2文字以上で入力して下さい。',
+            'text_edit.max'            => '140文字以下で入力して下さい。',
         ];
     }
 }

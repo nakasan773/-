@@ -19,6 +19,7 @@ class CreateTweetsTable extends Migration
             $table->unsignedInteger('user_id')->comment('ユーザID');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
 
+            $table->string('text_title')->comment('投稿タイトル');
             $table->string('text')->comment('投稿ツイート');
             $table->string('image')->nullable()->comment('投稿画像');
             $table->integer('city_id')->unsigned()->nullable()->default(null);//都道府県

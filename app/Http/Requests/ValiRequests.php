@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests;
 
-//use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\Request;
 use Illuminate\Foundation\Http\FormRequest;
-//use Illuminate\Validation\Rule;
 
 class ValiRequests extends FormRequest
 {
@@ -27,26 +25,21 @@ class ValiRequests extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required|min:2',
-            'image'  => 'required',
-            'city_id' => 'required',
-            //'email' => 'required',
-            //'screen_name' => 'required',
-            //'name' => 'required',
-            //'text_edit'   => 'required',
+            'text_title' => 'required|min:2|max:12',
+            'text'       => 'required|min:2|max:140',
+            'image'      => 'required|image|mimes:jpeg,png,jpg,gif',
+            'city_id'    => 'required',
         ];
     }
     
     public function messages()
     {
         return [
-            'text.required' => '投稿内容を入力して下さい。',
-            'image.required'  => '画像を選択して下さい。',
+            'text.required'    => '投稿内容を入力して下さい。',
+            'image.required'   => '画像を選択して下さい。',
+            'image.image'      => '指定されたファイルが画像ではありません。',
+            'image.mines'      => '指定された拡張子（PNG/JPG/GIF）ではありません。',
             'city_id.required' => '場所を選択して下さい',
-            //'email.email' => 'メールアドレスを入力して下さい。',
-            //'screen_name.required' => 'アカウントIDを入力して下さい。',
-            //'name.required' => 'ユーザー名を入力して下さい。',
-            //'text_edit.required'   => '編集内容を入力して下さい。',
         ];
     }
 }

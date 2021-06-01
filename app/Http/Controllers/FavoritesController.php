@@ -41,8 +41,10 @@ class FavoritesController extends Controller
 
         if(!$is_favorite) {
             $favorite->storeFavorite($user->id, $tweet_id);
+
             return back();
         }
+
         return back();
     }
 
@@ -95,8 +97,10 @@ class FavoritesController extends Controller
 
         if($is_favorite) {
             $favorite->destroyFavorite($favorite_id);
+
             return back();
         }
+
         return back();
     }
 }

@@ -12,8 +12,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-    
     use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -28,7 +28,7 @@ class User extends Authenticatable
         'single_comment',
         'profile_image'
     ];
-    
+
     protected $dates = ['deleted_at'];
 
     /**
@@ -48,57 +48,47 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
-    //ページネーション
+
     public function getAllUsers(Int $user_id)
     {
         return $this->Where('id', '<>', $user_id)->paginate(5);
     }
-    
-    // リレーション
+
     public function followers()
     {
         return $this->belongsToMany(User::class, 'followers', 'followed_id', 'following_id');
     }
-    
-    // リレーション
+
     public function follows()
     {
         return $this->belongsToMany(User::class, 'followers', 'following_id', 'followed_id');
     }
-    
-    // フォローしているか
+
     public function isFollowing(Int $user_id)
     {
         return $this->follows()->where('followed_id', $user_id)->exists();
     }
 
-    // フォローされているか
     public function isFollowed(Int $user_id) 
     {
         return (boolean) $this->followers()->where('following_id', $user_id)->first(['id']);
     }
-    
-    // フォローする
+
     public function follow(Int $user_id) 
     {
         return $this->follows()->attach($user_id);
     }
 
-    // フォロー解除する
     public function unfollow(Int $user_id)
     {
         return $this->follows()->detach($user_id);
     }
-    
-    //プロフィール編集
+
     public function updateProfile(Array $params)
     {
         if (isset($params['profile_image'])) {
-            //$file_name = $params['profile_image']->store('public/profile_image/');
             $file_name = $params['profile_image'];
             $path = Storage::disk('s3')->put('/',$file_name, 'public');
-            
 
             $this::where('id', $this->id)
                 ->update([
@@ -109,6 +99,7 @@ class User extends Authenticatable
                     'email'          => $params['email'],
                 ]);
         } else {
+
             $this::where('id', $this->id)
                 ->update([
                     'screen_name'    => $params['screen_name'],
