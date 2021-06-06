@@ -11,7 +11,7 @@
                 
                 </p>
                 <a href="{{ url('tweets/create') }}" class="btn btn-md btn-primary mr-2">ツイートする</a>
-                <a href="{{ url('users/' .auth()->user()->id) }}" class="btn btn-md btn-success mr-2 test">マイページ</a>
+                <!--<a href="{{ url('users/' .auth()->user()->id) }}" class="btn btn-md btn-success mr-2 test">マイページ</a>-->
                 <li><a href="{{ url('users/' .auth()->user()->id .'/favorite') }}">お気に入り</a></li>
                 <li><a href="{{ url('users/' .auth()->user()->id) }}">マイページ</a></li>
                 <li><a href="/logout">ログアウト</a></li>
