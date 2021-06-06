@@ -1,17 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <br>
-    
-    <br>
     
     <div class="text-center">
         <h2><b>お気に入り一覧画面</b></h2>
     </div>
-    
-    <br>
-    
+
     <br>
     
     <div class="text-center">
@@ -73,6 +67,10 @@
                                 <p class="font-weight-bold">フォロワー数</p>
                                 <span>{{ $follower_count }}</span>
                             </div>
+                            <div class="p-2 d-flex flex-column align-items-center">
+                                <p class="font-weight-bold">お気に入り数</p>
+                                <span>{{ $favorite_count }}</span>
+                            </div>
                         </div>
                     </div>
                     
@@ -105,24 +103,25 @@
                                     <p class="mb-0 text-secondary">{{ $timeline->created_at->format('Y-m-d H:i') }}</p>
                                 </div>
                             </div>
-                            
-                            
+
+                            <img class="card-img-fav" src="{{ Storage::disk('s3')->url($timeline->image) }}">
+
                             <div class="card-body">
-                                <img src="{{ Storage::disk('s3')->url($timeline->image) }}" class="alignnone size-large wp-image-976" alt="" width="300" height="180">
                                 <div class="text-left">
-                                    <a>{{ $timeline->text }}</a>
-                                    
-                                    <br>
-                                    
-                                    <form action="{{ route('tweets.index')}}" method="GET">
-                                        <input type="hidden" name="tweet_city" value="{{ $timeline->city->id }}" class="form-control">
-                                        <button type="submit" class="btn p-0 border-0"><i class="fas fa-hashtag"></i>
-                                        {{ $timeline->city->city }}</button>
-                                    </form>
+                                    <h4 class="mb-2">{{ $timeline->text_title }}</h4>
+                                    <div class="justify-content-flex-start">
+                                        {!! nl2br(e($timeline->text)) !!}
+                                        <br>
+                                        <form action="{{ route('tweets.index')}}" method="GET">
+                                            <input type="hidden" name="tweet_city" value="{{ $timeline->city->id }}" class="form-control">
+                                            <button type="submit" class="btn p-0 border-0"><i class="fas fa-hashtag"></i>
+                                                {{ $timeline->city->city }}
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                            
-                            
+
                             <div class="card-footer py-1 d-flex justify-content-end bg-white">
                                 
                                 @if ($timeline->user->id === Auth::user()->id)

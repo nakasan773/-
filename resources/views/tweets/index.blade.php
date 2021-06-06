@@ -2,17 +2,9 @@
 
 @section('content')
 
-    <br>
-
-    <br>
-
-    <br>
-
     <div class="text-center">
-        <h2><b>みんなの投稿</b></h2>
+        <h2><b>投稿を探す🔎</b></h2>
     </div>
-
-    <br>
 
     <br>
 
@@ -49,8 +41,12 @@
     </form>
 
     <br>
+    
+    <div class="text-center">
+        <button class="btn btn-success" onclick=location.href='/maps'>場所を探す🔎</button>
+    </div>
 
-    <div class="container">
+    <div class="container width">
         <div class="row justify-content-center">
             <div class="col-md-8 mb-3 text-right">
                 <a href="{{ url('users') }}">ユーザ一覧 <i class="fas fa-users" class="fa-fw"></i> </a>

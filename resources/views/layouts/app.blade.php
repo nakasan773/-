@@ -11,7 +11,9 @@
         <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet"><!--//追記-->
         <link rel="dns-prefetch" href="//fonts.gstatic.com"><!--//追記-->
         <link rel="stylesheet" href="/css/styles.css">
-        <!--トップページの--><!--
+        <link rel="stylesheet" href="/css/responsive.css">
+        <!--トップページの-->
+        <!--
         <link href="https://fonts.googleapis.com/css?family=Material+Icons+Outlined" rel="stylesheet">
         <link href="css/ress.css" media="all" rel="stylesheet" type="text/css" />
         <link href="css/style.css" media="all" rel="stylesheet" type="text/css" />
@@ -19,9 +21,10 @@
         -->
         
         <script src="{{ asset('js/app.js') }}"></script><!--//追記-->
+        <script src="{{ asset('js/map.js') }}"></script><!--//追記-->
         @livewireStyles
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        
+        <title>{{ config('app.key_name') }}</title>
         
     </head>
 

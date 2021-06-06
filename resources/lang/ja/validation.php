@@ -155,5 +155,6 @@ return [
         'password'=>'パスワード',
         'password_confirmation'=>'パスワード確認',
         'single_comment'=>'ひとこと',
+        'image'=>'画像'
     ],
 ];

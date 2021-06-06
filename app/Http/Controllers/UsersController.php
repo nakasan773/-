@@ -127,6 +127,7 @@ class UsersController extends Controller
         $tweet_count = $tweet->getTweetCount($user->id);
         $follow_count = $follower->getFollowCount($user->id);
         $follower_count = $follower->getFollowerCount($user->id);
+        $favorite_count = Favorite::where('user_id', $user->id)->pluck('tweet_id')->count();
 
         return view('users.favorite', [
             'user'           => $user,

@@ -2,12 +2,6 @@
 
 @section('content')
 
-    <br>
-        
-    <br>
-    
-    <br>
-    
     <div class="text-center">
         <h2><b>ユーザー一覧画面</b></h2>
     </div>
@@ -17,7 +11,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8 mb-3 text-right">
-                <a href="{{ url('tweets') }}">みんなの投稿へ <i class="fas fa-users" class="fa-fw"></i> </a>
+                <a href="{{ url('tweets') }}">投稿を見る <i class="fas fa-users" class="fa-fw"></i> </a>
             </div>
             <div class="col-md-8">
                 

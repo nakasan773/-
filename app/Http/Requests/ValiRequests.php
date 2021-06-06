@@ -35,11 +35,16 @@ class ValiRequests extends FormRequest
     public function messages()
     {
         return [
-            'text.required'    => '投稿内容を入力して下さい。',
-            'image.required'   => '画像を選択して下さい。',
-            'image.image'      => '指定されたファイルが画像ではありません。',
-            'image.mines'      => '指定された拡張子（PNG/JPG/GIF）ではありません。',
-            'city_id.required' => '場所を選択して下さい',
+            'text_title.required' => 'タイトル内容を入力して下さい。',
+            'text_title.min'      => '2文字以上で入力して下さい。',
+            'text_title.max'      => '12文字以内で入力して下さい。',
+            'text.required'       => '投稿内容を入力して下さい。',
+            'text.min'            => '2文字以上で入力して下さい。',
+            'text.max'            => '140文字以内で入力して下さい。',
+            'image.required'      => '画像を選択して下さい。',
+            'image.image'         => '指定されたファイルが画像ではありません。',
+            'image.mimes'         => '指定された拡張子（PNG/JPG/GIF）ではありません。',
+            'city_id.required'    => '場所を選択して下さい',
         ];
     }
 }
